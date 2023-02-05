@@ -17,7 +17,7 @@ export default {
         return {
             movies: [],
             xValue: 0,
-            r: 255,
+            r: 254,
             g: 0,
             b: 0,
             id: 1,
