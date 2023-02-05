@@ -2,6 +2,7 @@
   <div class="home">
     <Navbarhome/>
     <Carrousel/>
+    <Category/>
     <Catalogue/>
   </div>
 </template>
@@ -10,12 +11,14 @@
 import Navbarhome from "../components/Navbarhome";
 import Catalogue from "../components/Catalogue";
 import Carrousel from "../components/Carrousel";
+import Category from "../components/Category";
 
 export default {
   name: 'HomeView',
   components: {
     Navbarhome,
     Carrousel,
+    Category,
     Catalogue,
   }
 }
