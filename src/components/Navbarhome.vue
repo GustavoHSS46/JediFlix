@@ -10,7 +10,7 @@
         </div>
         <div class="logo" :class="[isActiveSettings ? activeSettings : '', 'blur']">
             <div class="image">
-                <img src="../assets/logo.png" alt="">
+                <img src="https://icon-library.com/images/star-wars-icon-png/star-wars-icon-png-9.jpg" alt="">
             </div>
             <h1>JediFlix</h1>
         </div>
@@ -56,7 +56,6 @@ export default {
     .logo img {
         width: 100%;
         height: 120%;
-        filter: invert(100%);
         object-position: center;
     }
     .image {
