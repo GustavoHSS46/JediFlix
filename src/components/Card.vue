@@ -22,8 +22,6 @@ export default {
         justify-content: center;
         align-items: center;
         color: white;
-        height: 50px;
-        width: 50px;
         border: 1px solid red;
         border-radius: 10px;
     }
