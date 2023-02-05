@@ -1,15 +1,22 @@
 <template>
     <div>
-        <h1>auauaua</h1>
+        <Card title="Terror" widthProps="20" heightProps="100" measurements="%"/>
     </div>
 </template>
 
 <script >
+import Card from './Card.vue'
+
 export default {
-    name: "category"
+    name: "category",
+    components: {
+        Card
+    }
 }
 </script>
 
 <style scoped>
-
+    div {
+        
+    }
 </style>

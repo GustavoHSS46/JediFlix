@@ -12,7 +12,6 @@ export default {
         heightProps: Number,
         measurements: String,
         fontSize: Number,
-        fontSize: Number,
     }
 }
 </script>
