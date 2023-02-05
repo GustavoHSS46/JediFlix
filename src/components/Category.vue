@@ -3,7 +3,7 @@
         <Card title="Suspence" widthProps="20" heightProps="100" measurements="%" fontSize="16"/>
         <Card title="Terror" widthProps="20" heightProps="100" measurements="%" fontSize="16"/>
         <Card title="Comédia" widthProps="20" heightProps="100" measurements="%" fontSize="16"/>
-        <Card title="3D" widthProps="20" heightProps="100" measurements="%" fontSize="20"/>
+        <Card title="3D" widthProps="25" heightProps="100" measurements="%" fontSize="20"/>
     </div>
 </template>
 
