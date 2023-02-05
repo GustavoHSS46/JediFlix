@@ -30,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+    .div-hover {
+        transform: scale(1.34);
+    }
     div{
         border: 1px solid white;
         border-radius: 10px;
@@ -51,7 +54,7 @@ export default {
     .bgCards {
         position: relative;
         z-index: -99;
-        background-size: 100%;
+        background-size: cover;
     }
     div img {
         position: relative;
