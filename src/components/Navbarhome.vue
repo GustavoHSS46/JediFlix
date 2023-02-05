@@ -95,7 +95,7 @@ export default {
         transition: 1450ms;
         rotate: 65deg;
         margin-right: 82%;
-        color:black;
+        color:red;
     }
 
     .searchSpan{
