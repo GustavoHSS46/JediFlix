@@ -3,7 +3,8 @@
         <h1>{{ title }}</h1>
         <div v-if="hover" class="divhovering">
             <Transition name="fade" appear>
-                <img src="http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSmHDYol-bYFxjTBuM9j5g85-PsXzRC6497yclLp85cQmJWSSRYqzOhQ2bxdKfQY2l70qWsRqkShcuZcgA">
+                <div :style="{backgroundImage: `url('${gifBackground}')` }" class="bgCards"></div>
+                
             </Transition>
         </div>
         
@@ -18,6 +19,7 @@ export default {
         heightProps: Number,
         measurements: String,
         fontSize: Number,
+        gifBackground: String,
     },
     data() {
         return {
@@ -29,7 +31,7 @@ export default {
 
 <style scoped>
     div{
-        border: 1px solid rgb(255, 0, 0);
+        border: 1px solid white;
         border-radius: 10px;
         display: flex;
         height: 100%;
@@ -40,11 +42,16 @@ export default {
         color: white;
         user-select: none;
         overflow: hidden;
-        transition: 550ms;
+        transition: 1550ms;
     }
     div h1 {
         position: absolute;
         opacity: 100%;
+    }
+    .bgCards {
+        position: relative;
+        z-index: -99;
+        background-size: 100%;
     }
     div img {
         position: relative;
@@ -60,11 +67,12 @@ export default {
 
     .fade-enter-active,
     .fade-leave-active {
-        transition: opacity 0.5s ease;
+        transition: opacity 0.8s ease;
     }
 
     .fade-enter-from,
     .fade-leave-to {
+        transition: 0.8s ease;
         opacity: 0;
     }
 </style>
