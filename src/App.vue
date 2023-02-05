@@ -16,10 +16,10 @@
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
   overflow-x: hidden;
   background-color: rgb(26, 29, 41);
+  display: flex;
+  justify-content: center;
 }
 
 #app {
@@ -29,7 +29,8 @@ body {
   text-align: center;
   color: #101935;
   display: flex;
+  width: 1440px;
+  height: 100vh;  
   justify-content: center;
-  
 }
 </style>

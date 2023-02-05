@@ -32,7 +32,7 @@ export default {
     data() {
         return {
             isActiveSearch: false,
-            isActiveSettings: false
+            isActiveSettings: false,
         }
     }
 }
@@ -41,10 +41,13 @@ export default {
 
 <style scoped>
     div {
+        position: relative;
+        z-index: 99;
         display: flex;
         align-items: center;
         height: 4rem;
         color: white;
+        margin-top: 24rem;
     }
     .logo {
         width: 33.33%;

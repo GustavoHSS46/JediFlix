@@ -25,7 +25,7 @@ export default {
     .categoryMain {
         width: 100%;
         height: 130px;
-        margin-top: 42rem;
+        margin-top: 50rem;
         color: white;
         display: flex;
         justify-content: space-around;
