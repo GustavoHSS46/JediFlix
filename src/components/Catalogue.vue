@@ -42,10 +42,9 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
     .gridMovies {
-        margin-top: 55rem;
         position: relative;
         gap: 1.5rem;
         z-index: 8;

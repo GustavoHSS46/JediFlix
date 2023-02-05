@@ -29,9 +29,9 @@ export default {
     methods: {
         timed () {
             setInterval(() => {
-                if (this.xValue > 800) {
-                    this.xValue = 0;
-                    this.id = 1;
+                if (this.xValue > 801) {
+                    this.xValue =0
+                    this.id = 1
                 } else {
                     this.id++;
                     this.xValue += 100
