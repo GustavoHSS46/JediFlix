@@ -45,7 +45,7 @@ export default {
         justify-content: flex-end;
     }
     .gridMovies {
-        margin-top: 37rem;
+        margin-top: 55rem;
         position: relative;
         gap: 1.5rem;
         z-index: 8;
