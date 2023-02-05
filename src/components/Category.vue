@@ -24,12 +24,11 @@ export default {
     
     .categoryMain {
         width: 100%;
-        border: 1px solid white;
         height: 130px;
         margin-top: 42rem;
         color: white;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
     }
 </style>
