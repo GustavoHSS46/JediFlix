@@ -1,11 +1,13 @@
 <template>
     <div class="carrousel">
-        <div class="carrouselContainer" :style="randomColor" v-if="movies.length">
-            <div :style="x" class="movieContainer" v-for="movie in movies" :key="movie.id = 2">
-                <router-link :to="{name: 'Movie', params: {id: this.id}}">
-                    <p>Destaques Da Semana: {{ movie.name }}</p>
-                    <img :src="movie.headerImage" >
-                </router-link>
+        <div class="carrouselMain">
+            <div class="carrouselContainer" :style="randomColor" v-if="movies.length">
+                <div :style="x" class="movieContainer" v-for="movie in movies" :key="movie.id = 2">
+                    <router-link :to="{name: 'Movie', params: {id: this.id}}">
+                        <p>Destaques Da Semana: {{ movie.name }}</p>
+                        <img :src="movie.headerImage" >
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -60,18 +62,25 @@ export default {
 <style scoped>
     .carrousel {
         position: absolute;
-        z-index: 909;
+        z-index: 99;
         color: white;;
-        top: 10vh;
+        top: 20vh;
         left: 0;
-        height: 36rem;
-        width: 100%;
+        height: 40%;
+        width:  100vw;
         display: flex;
         justify-content: center;
+        align-items: center;
+    }
+
+    .carrouselMain {
+        width: 90%;
+        max-width: 1440px;
+        height: 100%;
     }
 
     .carrouselContainer {
-        width: 94%;
+        width: 100%;
         height: 100%;
         border-radius: 16px 16px;
         overflow: hidden;
