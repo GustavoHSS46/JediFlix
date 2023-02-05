@@ -1,46 +1,49 @@
 <template>
-    <div class="bg">
-        <div class="bgimg">
-            <img :src="this.header" >
+    <div class="moviedisplayMain">
+        <div class="bg">
+            <div class="bgimg">
+                <img :src="this.header" >
+            </div>
+            <div class="bgimgCover">
+            </div>
         </div>
-        <div class="bgimgCover">
-        </div>
+        <div>
+            <div class="moviePoster">
+                <div class="poster">
+                    <div class="cover">
+                        <img :src="this.cover" >
+                    </div>
+                    <p>Preço Do Ingresso:</p>
+                    <h1>R${{this.price}},00</h1>
+                </div>
+                <router-link to="/">
+                    cancelar
+                </router-link>
+                
+            </div>
+            <div class="details">
+                <div class="name">
+                    <h1>{{this.name}}</h1>
+                </div>
+                <div class="more">
+                    <div class="category">
+                        <p>categoria: {{this.category}}</p>
+                    </div>
+                    <div class="info">
+                        <p>data de lançamento: {{this.productedAt}}</p>
+                        <p>duração do filme: {{this.duration}}</p>
+                        <p>classificação: {{this.ageClassification}}</p>
+                    </div>
+                </div>
+                <div class="sinopse">
+                    <h2>sinopse:</h2>
+                    <p>{{this.overview}}</p>
+                </div>
+                
+            </div>
+        </div>  
     </div>
-    <div>
-        <div class="moviePoster">
-            <div class="poster">
-                <div class="cover">
-                    <img :src="this.cover" >
-                </div>
-                <p>Preço Do Ingresso:</p>
-                <h1>R${{this.price}},00</h1>
-            </div>
-            <router-link to="/">
-                cancelar
-            </router-link>
-            
-        </div>
-        <div class="details">
-            <div class="name">
-                <h1>{{this.name}}</h1>
-            </div>
-            <div class="more">
-                <div class="category">
-                    <p>categoria: {{this.category}}</p>
-                </div>
-                <div class="info">
-                    <p>data de lançamento: {{this.productedAt}}</p>
-                    <p>duração do filme: {{this.duration}}</p>
-                    <p>classificação: {{this.ageClassification}}</p>
-                </div>
-            </div>
-            <div class="sinopse">
-                <h2>sinopse:</h2>
-                <p>{{this.overview}}</p>
-            </div>
-            
-        </div>
-    </div>  
+    
 </template>
 
 <script>
@@ -58,7 +61,7 @@ export default {
             duration: '',
             ageClassification: '',
             overview: '',
-            uri: 'http://localhost:3000/movies/' + this.id
+            uri: 'https://jediflix-back-production.up.railway.app/film/' + this.id
         }
     },
     mounted() {
@@ -78,6 +81,8 @@ export default {
 </script>
 
 <style scoped>
+
+
     div {
         display: flex;
         flex-direction: row;

@@ -28,7 +28,7 @@ export default {
         }
     },
     mounted(){
-        fetch('http://localhost:3000/movies').then(res => res.json()).then(data => this.movies = data).catch(err => console.log(err))
+        fetch('https://jediflix-back-production.up.railway.app/films').then(res => res.json()).then(data => this.movies = data).catch(err => console.log(err))
     }
 }
 </script>
