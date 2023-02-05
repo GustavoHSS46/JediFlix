@@ -18,11 +18,17 @@ export default {
 
 <style scoped>
     div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
+        color: red;
         border: 1px solid red;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;;
+        align-items: center;
+    }
+    div h1{
+        color: white;
+        justify-content: center;;
+        align-items: center;
         border-radius: 10px;
     }
 </style>
