@@ -17,14 +17,14 @@ export default {
         return {
             movies: [],
             xValue: 0,
-            r: 255,
+            r: 254,
             g: 0,
             b: 0,
             id: 1,
         }
     },
     mounted(){
-        fetch('http://localhost:3000/movies').then(res => res.json()).then(data => this.movies = data).catch(err => console.log(err))
+        fetch('https://jediflix-back-production.up.railway.app/films').then(res => res.json()).then(data => this.movies = data).catch(err => console.log(err))
     },
     methods: {
         timed () {
