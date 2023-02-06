@@ -204,9 +204,19 @@ export default {
     .oppacity0 {
         opacity: 60%;
         color: red;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .oppacity1 {
+        height: 100%;
+        width: 100%;
         opacity: 100%;
         color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
