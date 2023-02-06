@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <Navbarhome/>
-    <Carrousel/>
-    <Category/>
+    <Carrousel/> 
+    <Category/>   
     <Catalogue/>
   </div>
 </template>
@@ -26,9 +26,11 @@ export default {
 
 <style> 
   .home {
-    width: 95%;
+    width: 90%;
+    height: 100%;
+    gap: 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
   }
 </style>
