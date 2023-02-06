@@ -7,7 +7,7 @@
             <div class="bgimgCover">
             </div>
         </div>
-        <div>
+        <div class="moviedisplayInfo">
             <div class="moviePoster">
                 <div class="poster">
                     <div class="cover">
@@ -83,13 +83,23 @@ export default {
 <style scoped>
 
 
-    div {
+    .moviedisplayMain {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .moviedisplayInfo {
+        color: white;
+        padding: 0;
         display: flex;
         flex-direction: row;
-        height: 90vh;
-        margin-top: 3vh;
-        width: 100vw;
-        color: white;
+        height: 90%;
+        min-width: none;
+        width: 100%;
+        max-width: 1024px;
         text-transform: uppercase;
     }
     .bg {
@@ -119,37 +129,41 @@ export default {
         background:linear-gradient(0deg, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
     }
     .details {
+        height: 100%;
         display: flex;
+        justify-content: flex-start;
         flex-direction: column;
+        gap: 7%;
         padding: 20px 40px;
     }
     .name {
-        margin-top: 8rem;
         width: 100%;
         height: fit-content;
     }
     .category {
-        position: relative;
         width: 100%;
-        top: 25px;
         height: fit-content;
     }
     .info {
         width: 100%;
-        gap: 25px;
+        margin-top: 10px;
+        gap: 2%;
         height: fit-content;
+        display: flex;
+        flex-direction: row;
+    }
+    .info p{
+        font-weight: 400;
+        font-size: 14px;
+        opacity: 70%;
     }
     .more {
         width: 100%;
-        position: relative;;
-        top: -55px;
         display: flex;
         flex-direction: column;
         height: fit-content;
     }
     .sinopse {
-        position: relative;;
-        top: -45px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -168,7 +182,7 @@ export default {
     }
 
     .moviePoster{
-        width: 30%;
+        min-width: 35%;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -182,8 +196,8 @@ export default {
     }
 
     .cover {
-        width: 60%;
-        height: 80%;
+        width: 80%;
+        height: 100%;
         border-radius: 16px;
         overflow: hidden;
         margin-bottom: 15px;
@@ -207,7 +221,7 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 50%;
+        height: 60%;
     }
 
     a {
