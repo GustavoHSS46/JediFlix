@@ -97,8 +97,8 @@ export default {
     }
 
     .loginH1 {
+        margin-top: 22%;
         position: relative;
-        top: -45px;
         padding: 0;
         margin: 0;
         height: fit-content;
