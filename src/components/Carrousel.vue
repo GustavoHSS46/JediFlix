@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
     .carrousel {
-        position: absolute;
+        position: absolute;;
         z-index: 99;
         color: white;;
         top: 20vh;
