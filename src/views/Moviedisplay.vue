@@ -1,12 +1,6 @@
 <template>
     <div class="moviedisplayMain">
-        <div class="bg">
-            <div class="bgimg">
-                <img :src="this.header" >
-            </div>
-            <div class="bgimgCover">
-            </div>
-        </div>
+        
         <div class="moviedisplayInfo">
             <div class="moviePoster">
                 <div class="poster">
