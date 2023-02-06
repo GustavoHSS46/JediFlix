@@ -7,7 +7,7 @@
             <div class="bgimgCover">
             </div>
         </div>
-        <div>
+        <div class="moviedisplayInfo">
             <div class="moviePoster">
                 <div class="poster">
                     <div class="cover">
@@ -83,13 +83,25 @@ export default {
 <style scoped>
 
 
-    div {
+    .moviedisplayMain {
+        border: 2px solid white;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .moviedisplayInfo {
+        color: white;
+        border: 2px solid red;
+        padding: 0;
         display: flex;
         flex-direction: row;
-        height: 90vh;
-        margin-top: 3vh;
-        width: 100vw;
-        color: white;
+        height: 90%;
+        min-width: none;
+        width: 100%;
+        max-width: 1024px;
         text-transform: uppercase;
     }
     .bg {
@@ -119,9 +131,11 @@ export default {
         background:linear-gradient(0deg, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
     }
     .details {
+        height: 100%;
         display: flex;
         flex-direction: column;
         padding: 20px 40px;
+        border: 2px solid blue;
     }
     .name {
         margin-top: 8rem;
@@ -168,7 +182,8 @@ export default {
     }
 
     .moviePoster{
-        width: 30%;
+        border: 2px solid green;
+        min-width: 35%;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -182,8 +197,9 @@ export default {
     }
 
     .cover {
-        width: 60%;
-        height: 80%;
+        border: 1px solid yellow;
+        width: 80%;
+        height: 100%;
         border-radius: 16px;
         overflow: hidden;
         margin-bottom: 15px;
@@ -207,7 +223,7 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 50%;
+        height: 60%;
     }
 
     a {
