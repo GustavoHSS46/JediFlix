@@ -17,7 +17,7 @@
                     <h1>R${{this.price}},00</h1>
                 </div>
                 <router-link to="/">
-                    cancelar
+                    Cancelar
                 </router-link>
                 
             </div>
