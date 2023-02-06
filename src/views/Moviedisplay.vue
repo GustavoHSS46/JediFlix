@@ -84,7 +84,6 @@ export default {
 
 
     .moviedisplayMain {
-        border: 2px solid white;
         height: 100vh;
         width: 100vw;
         display: flex;
@@ -94,7 +93,6 @@ export default {
 
     .moviedisplayInfo {
         color: white;
-        border: 2px solid red;
         padding: 0;
         display: flex;
         flex-direction: row;
@@ -133,37 +131,39 @@ export default {
     .details {
         height: 100%;
         display: flex;
+        justify-content: flex-start;
         flex-direction: column;
+        gap: 7%;
         padding: 20px 40px;
-        border: 2px solid blue;
     }
     .name {
-        margin-top: 8rem;
         width: 100%;
         height: fit-content;
     }
     .category {
-        position: relative;
         width: 100%;
-        top: 25px;
         height: fit-content;
     }
     .info {
         width: 100%;
-        gap: 25px;
+        margin-top: 10px;
+        gap: 2%;
         height: fit-content;
+        display: flex;
+        flex-direction: row;
+    }
+    .info p{
+        font-weight: 400;
+        font-size: 14px;
+        opacity: 70%;
     }
     .more {
         width: 100%;
-        position: relative;;
-        top: -55px;
         display: flex;
         flex-direction: column;
         height: fit-content;
     }
     .sinopse {
-        position: relative;;
-        top: -45px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -182,7 +182,6 @@ export default {
     }
 
     .moviePoster{
-        border: 2px solid green;
         min-width: 35%;
         height: 100%;
         display: flex;
@@ -197,7 +196,6 @@ export default {
     }
 
     .cover {
-        border: 1px solid yellow;
         width: 80%;
         height: 100%;
         border-radius: 16px;
