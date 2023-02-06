@@ -35,8 +35,6 @@ export default {
 
 <style scoped>
     .mainCatalogue {
-        position: relative;
-        z-index: 7;
         height: fit-content;
         width: 100%;
         display: flex;
@@ -45,9 +43,7 @@ export default {
         justify-content: flex-start;
     }
     .gridMovies {
-        position: relative;
-        gap: 1.5rem;
-        z-index: 8;
+        gap: 1.4rem;
         width: 100%;
         height: 90%;
         
@@ -75,7 +71,6 @@ export default {
     }
 
     .title {
-        position: relative;
         color: white;
         font-size: 24px;
         display: flex;

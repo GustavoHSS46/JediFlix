@@ -61,21 +61,18 @@ export default {
 
 <style scoped>
     .carrousel {
-        position: absolute;;
-        z-index: 99;
         color: white;;
-        top: 20vh;
-        left: 0;
         height: 40%;
-        width:  100vw;
+        min-width: none;
+        width: 100%;
+        max-width:  1440px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .carrouselMain {
-        width: 90%;
-        max-width: 1440px;
+        width: 95%;
         height: 100%;
     }
 

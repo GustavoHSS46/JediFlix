@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="navbarMain">
         <div class="search">
             <Transition name="slide-fade">
                 <input v-if="isActiveSearch === true" class="input" type="text" placeholder="Pesquise Aqui">
@@ -40,14 +40,14 @@ export default {
 </script>
 
 <style scoped>
-    div {
-        position: relative;
-        z-index: 99;
+    .navbarMain {
+        margin-top: 1rem;
+        width: 100%;
         display: flex;
-        align-items: center;
+        align-items: center;;
         height: 4rem;
         color: white;
-        margin-top: 24rem;
+        justify-content: space-between;
     }
     .logo {
         width: 33.33%;

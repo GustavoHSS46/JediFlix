@@ -26,11 +26,12 @@ body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #101935;
+  min-width: none;
+  width: 100%;
+  max-width: 1440px;
+  height: 100vh; 
   display: flex;
-  width: 1440px;
-  height: 100vh;  
   justify-content: center;
 }
 </style>
