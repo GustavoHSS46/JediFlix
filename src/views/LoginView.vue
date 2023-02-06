@@ -17,9 +17,11 @@
                         </Transition>
                         
                     </div>
-                    <button class="confirmBTN">
-                        <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Se Juntar Ao Esquadrão</h1>
-                    </button> 
+                    <RouterLink to="/">
+                        <button class="confirmBTN">
+                            <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Se Juntar Ao Esquadrão</h1>
+                        </button> 
+                    </RouterLink>
                 </div>
             </form>
             <div class="register">
@@ -133,6 +135,12 @@ export default {
         font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    a{
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
     }
 
     .confirmBTN {
