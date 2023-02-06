@@ -1,6 +1,12 @@
 <template>
     <div class="moviedisplayMain">
-        
+        <div class="bg">
+            <div class="bgimg">
+                <img :src="this.header" >
+            </div>
+            <div class="bgimgCover">
+            </div>
+        </div>
         <div class="moviedisplayInfo">
             <div class="moviePoster">
                 <div class="poster">
@@ -11,7 +17,7 @@
                     <h1>R${{this.price}},00</h1>
                 </div>
                 <router-link to="/">
-                    Cancelar
+                    cancelar
                 </router-link>
                 
             </div>
