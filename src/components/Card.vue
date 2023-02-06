@@ -31,10 +31,9 @@ export default {
 
 <style scoped>
     .div-hover {
-        transform: scale(1.34);
+        transform: scale(1.2);
     }
     div{
-        border: 1px solid white;
         border-radius: 10px;
         display: flex;
         height: 100%;
