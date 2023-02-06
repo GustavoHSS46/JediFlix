@@ -48,9 +48,11 @@ export default {
 
 <style scoped>
     div {
+        min-width: none;
         width: 100vw;
+        max-width: 768px;
         height: 100vh;
-        padding: 0 20%;
+        padding: 0 5%;
         display: flex;
         justify-content: center;
         align-items: center;
