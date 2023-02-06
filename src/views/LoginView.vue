@@ -10,7 +10,17 @@
             <form class="form">
                 <input type="text" placeholder="Entre Com Seu Email" required>
                 <input type="password" placeholder="Entre Com Sua Senha" required>
-                <button class="confirmBTN">Se Juntar Ao Esquadrão</button>
+                <div @mouseenter="hover = true" @mouseleave="hover = false" class="divBtn">
+                    <div v-if="hover" class="hovering">
+                        <Transition name="fade" appear>
+                            <img src="../assets/1608229455-star-wars.gif" alt="">
+                        </Transition>
+                        
+                    </div>
+                    <button class="confirmBTN">
+                        <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Se Juntar Ao Esquadrão</h1>
+                    </button> 
+                </div>
             </form>
             <div class="register">
                 <h1>Ainda Não Faz Parte Do Esquadrão? Não Perca Mais Tempo Se Increva já</h1>
@@ -20,13 +30,13 @@
 </template>
 
 <script>
-import Card from '../components/Card.vue'
-
 export default {
     name: "Login",
-    components: {
-        Card
-    }
+    data() {
+        return {
+            hover: false,
+        };
+    },
 }
 </script>
 
@@ -104,6 +114,7 @@ export default {
         gap: 4%;
         display: flex;;
         flex-direction: column;
+        transition: 450ms;
     }
     .form input{
         border: 2px solid red;
@@ -125,21 +136,69 @@ export default {
     }
 
     .confirmBTN {
-        margin-top: 2%;
+        height: 100%;
         width: 100%;
-        height: 25%;
         background: rgb(167, 0, 0);
         display: flex;;
         align-items: center;
         justify-content: center;;
         padding: 0;
-        color: white;
         border: 2px solid rgb(255, 0, 0);
+        transition: 450ms;
+        border-radius: 12px;
+    }
+    .divBtn {
+        margin-top: 2%;
+        position: relative;
+        width: 100%;
+        height: 25%;
+        padding: 0;
+    }
+
+    .hovering {
+        position: absolute;
+        border-radius: 12px;
+        height: 100%;
+        width: 100%;
+        border: 2px solid red;
+        z-index: 1;
+        overflow: hidden;
+        padding: 0;
+    }
+    .hovering img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    .form h1 {
+        position: relative;
+        z-index: 2;
         color: white;
         font-size: 20px;
         font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         cursor: pointer;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.8s ease;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        transition: 0.8s ease;
+        opacity: 0;
+    }
+
+    .oppacity0 {
+        opacity: 60%;
+        color: red;
+    }
+    .oppacity1 {
+        opacity: 100%;
+        color: red;
     }
 </style>

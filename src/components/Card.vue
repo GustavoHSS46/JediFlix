@@ -4,7 +4,6 @@
         <div v-if="hover" class="divhovering">
             <Transition name="fade" appear>
                 <div :style="{backgroundImage: `url('${gifBackground}')` }" class="bgCards"></div>
-                
             </Transition>
         </div>
         
