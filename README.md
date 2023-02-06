@@ -1,4 +1,4 @@
-# jedi
+# JediFlix 🍿
 
 ## Project setup
 ```
