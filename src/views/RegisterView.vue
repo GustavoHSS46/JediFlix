@@ -5,11 +5,13 @@
                 <img src="https://icon-library.com/images/star-wars-icon-png/star-wars-icon-png-9.jpg" alt="">
             </div>
             <div class="welcome">
-                <h1>Soldado, Corra O Esquadrão JediFlix Precisa De Você</h1>
+                <h1>Soldado, Fale Um Pouco Sobre Você</h1>
             </div>
             <form class="form">
+                <input type="text" placeholder="Entre Com Seu Nome" required>
                 <input type="text" placeholder="Entre Com Seu Email" required>
                 <input type="password" placeholder="Entre Com Sua Senha" required>
+                <input type="password" placeholder="Confirme Sua Senha" required>
                 <div @mouseenter="hover = true" @mouseleave="hover = false" class="divBtn">
                     <div v-if="hover" class="hovering">
                         <Transition name="fade" appear>
@@ -19,14 +21,14 @@
                     </div>
                     <RouterLink to="/">
                         <button class="confirmBTN">
-                            <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Se Juntar Ao Esquadrão</h1>
+                            <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Entrar No Esquadrão</h1>
                         </button> 
                     </RouterLink>
                 </div>
             </form>
-            <div class="register">
-                <RouterLink to="/register">
-                    <h1>Ainda Não Faz Parte Do Esquadrão? Não Perca Mais Tempo Se Increva já</h1>
+            <div class="loginH1">
+                <RouterLink to="/login">
+                    <h1>Já Faz Parte Do Esquadrão? Não Perca Mais Tempo</h1>
                 </RouterLink>
             </div>
         </div>
@@ -58,7 +60,7 @@ export default {
     }
     .login {
         width: 1400px;
-        height: 60%;
+        height: 90%;
         padding: 0;
         display: flex;
         justify-content: flex-start;
@@ -94,10 +96,11 @@ export default {
         font-size: 26px;
     }
 
-    .register {
+    .loginH1 {
+        position: relative;
+        top: -45px;
         padding: 0;
         margin: 0;
-        margin-top: 2%;
         height: fit-content;
         width: 100%;
         display: flex;
@@ -105,10 +108,10 @@ export default {
         user-select: none;
         cursor: pointer;
     }
-    .register h1{
+    .loginH1 h1{
         font-family: 'Montserrat', sans-serif;
         color: white;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 100;
     }
     .form {
@@ -116,7 +119,7 @@ export default {
         padding: 0;
         width: 100%;
         height: 50%;
-        gap: 4%;
+        gap: 2%;
         display: flex;;
         flex-direction: column;
         transition: 450ms;
@@ -125,7 +128,7 @@ export default {
         border: 2px solid red;
         padding: 10px;
         width: 100%;
-        height: 30%;
+        height: 15%;
         background: none;
         display: flex;;
         flex-direction: column;
@@ -162,7 +165,7 @@ export default {
         margin-top: 2%;
         position: relative;
         width: 100%;
-        height: 25%;
+        height: 15%;
         padding: 0;
     }
 
