@@ -41,7 +41,7 @@ export default {
                     this.g = Math.floor(256 / 2 * Math.random() + 100);
                     this.b = Math.floor(256 / 2 * Math.random() + 100);
                 }
-            }, 5800);
+            }, 5000);
         },
         
     },
@@ -62,7 +62,7 @@ export default {
 <style scoped>
     .carrousel {
         color: white;;
-        height: 40%;
+        height: 50%;
         min-width: none;
         width: 100%;
         max-width:  1440px;
@@ -94,13 +94,17 @@ export default {
         width: 100%;
         height: 100%;  
         object-fit: cover; 
+        object-position: center;
+        background-repeat: no-repeat;
+        object-position: 50% 10%;
     }
 
     p{
         text-decoration: none;
         font-size: 24px;
         font-weight: 100;
-        padding: 10px 0px;
+        padding: 10px 10px;
+        text-align: center;
     }
     a{
         text-decoration: none;

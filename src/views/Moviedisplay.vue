@@ -104,13 +104,13 @@ export default {
         flex-direction: row;
         min-height: none;
         height: 100%;
-        max-height: 900px;
+        max-height: 882px;
         min-width: none;
         width: 100%;
-        max-width: 1024px;
+        max-width: 1440px;
         text-transform: uppercase;
         overflow: hidden;
-    }
+    } 
     .bg {
         position: absolute;
         left: 0;
@@ -127,6 +127,8 @@ export default {
         object-fit: cover;
         height: 100%;
         width: 100%;
+        background-repeat: no-repeat;
+        object-position: 50% 10%;
     }
     .bgimg {
         width: 100%;
@@ -237,10 +239,10 @@ export default {
         background: black;;
     }
     .cover img {
+        object-position: center;
         object-fit: cover;
         width: 100%;
         height: 100%;
-        filter: brightness(100%);
     }
     .moviePoster p {
         color: red;
@@ -257,7 +259,7 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 60%;
+        height: 70%;
     }
 
     a {
