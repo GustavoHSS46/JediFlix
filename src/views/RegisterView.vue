@@ -25,12 +25,13 @@
                         </button> 
                     </RouterLink>
                 </div>
+                <div class="loginH1">
+                    <RouterLink to="/login">
+                        <h1>Já Faz Parte Do Esquadrão? Não Perca Mais Tempo</h1>
+                    </RouterLink>
+                </div>
             </form>
-            <div class="loginH1">
-                <RouterLink to="/login">
-                    <h1>Já Faz Parte Do Esquadrão? Não Perca Mais Tempo</h1>
-                </RouterLink>
-            </div>
+            
         </div>
     </div>
 </template>
@@ -115,23 +116,7 @@ export default {
         50% { border-color: red }
     }
 
-    .loginH1 {
-        position: relative;
-        padding: 0;
-        margin: 0;
-        height: fit-content;
-        width: fit-content;
-        display: flex;
-        justify-content: left;
-        user-select: none;
-        cursor: pointer;
-    }
-    .loginH1 h1{
-        font-family: 'Montserrat', sans-serif;
-        color: white;
-        font-size: 26px;
-        font-weight: 100;
-    }
+    
     .form {
         margin-top: 3%;
         padding: 0;
@@ -248,5 +233,24 @@ export default {
         font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .loginH1 {
+        margin-top: 1%;
+        position: relative;
+        padding: 0;
+        height: fit-content;
+        width: fit-content;
+        display: flex;
+        justify-content: left;
+        user-select: none;
+        cursor: pointer;
+    }
+    .loginH1 h1{
+        white-space: nowrap;
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+        font-size: 26px;
+        font-weight: 100;
     }
 </style>
