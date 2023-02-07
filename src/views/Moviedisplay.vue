@@ -89,11 +89,12 @@ export default {
 
 
     .moviedisplayMain {
-        height: 100vh;
-        width: 100vw;
+        height: 100%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 5% 5%;
     }
 
     .moviedisplayInfo {
@@ -101,11 +102,14 @@ export default {
         padding: 0;
         display: flex;
         flex-direction: row;
-        height: 90%;
+        min-height: none;
+        height: 100%;
+        max-height: 900px;
         min-width: none;
         width: 100%;
         max-width: 1024px;
         text-transform: uppercase;
+        overflow: hidden;
     }
     .bg {
         position: absolute;
@@ -114,10 +118,12 @@ export default {
         z-index: -10;
         height: 100vh;
         width: 100vw;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
     }
     .bg img{
+        object-position: center;
         object-fit: cover;
         height: 100%;
         width: 100%;
@@ -125,13 +131,13 @@ export default {
     .bgimg {
         width: 100%;
         height: 50%;
-        margin-top: -1.8rem;
     }
     .bgimgCover {
-        width: 100%;
-        height: 150%;
-        margin-top: -38rem;
-        background:linear-gradient(0deg, rgba(36, 39, 51, 1) 55%, rgba(0, 0, 0, 0) 100%);
+        position: absolute;
+        z-index: 2;
+        min-width: 100vw;
+        min-height: 150vh;
+        background:linear-gradient(0deg, rgba(20, 20, 20, 1) 75%, rgba(0, 0, 0, 0) 100%);
     }
     .details {
         height: 100%;
@@ -173,7 +179,27 @@ export default {
         display: flex;
         flex-direction: column;
         text-align: left;
-        height: fit-content;
+        max-height: 50%;
+        overflow-y: scroll;
+        padding: 0 15px;
+        transition: 1450ms;
+    }
+    .sinopse::-webkit-scrollbar {
+        margin-left: 15px;
+        width: 5px;
+    }
+    .sinopse::-webkit-scrollbar-track {
+        background: white;
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 6px;
+    }
+    .sinopse::-webkit-scrollbar-thumb {
+        background: red;
+        border-radius: 6px;
+        
+    }
+    .sinopse::-webkit-scrollbar-thumb:hover {
+        background: rgb(164, 0, 0);
     }
     .sinopse h2 {
         font-size: 24px;
