@@ -1,35 +1,47 @@
 <template>
-    <div>
-        <div class="login">
-            <div class="image">
-                <img src="https://icon-library.com/images/star-wars-icon-png/star-wars-icon-png-9.jpg" alt="">
-            </div>
-            <div class="welcome">
-                <h1>Soldado, Corra O Esquadrão JediFlix Precisa De Você</h1>
-            </div>
-            <form class="form">
-                <input type="text" placeholder="Entre Com Seu Email" required>
-                <input type="password" placeholder="Entre Com Sua Senha" required>
-                <div @mouseenter="hover = true" @mouseleave="hover = false" class="divBtn">
-                    <div v-if="hover" class="hovering">
-                        <Transition name="fade" appear>
-                            <img src="../assets/1608229455-star-wars.gif" alt="">
-                        </Transition>
-                        
+    <div class="LoginBehind">
+        <div class="obj1">
+            <img src="../assets/obj1.png" alt="">
+        </div>
+        <div class="obj2">
+            <img src="../assets/obj2.png" alt="">
+        </div>
+    </div>
+    <div class="LoginFront">
+        <Transition name="slide-fade" appear>
+            <div class="login">
+                <div :style="up" class="image">
+                    <img src="https://icon-library.com/images/star-wars-icon-png/star-wars-icon-png-9.jpg" alt="">
+                </div>
+                <div class="welcome">
+                    <Transition name="fade">
+                        <h1>Soldado, Corra O Esquadrão JediFlix Precisa De Você</h1>
+                    </Transition>
+                </div>
+                <form class="form">
+                    <input type="text" placeholder="Entre Com Seu Email" required>
+                    <input type="password" placeholder="Entre Com Sua Senha" required>
+                    <div @mouseenter="hover = true" @mouseleave="hover = false" class="divBtn">
+                        <div v-if="hover" class="hovering">
+                            <Transition name="fade" appear>
+                                <img src="../assets/1608229455-star-wars.gif" alt="">
+                            </Transition>
+                            
+                        </div>
+                        <RouterLink to="/">
+                            <button class="confirmBTN">
+                                <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Se Juntar Ao Esquadrão</h1>
+                            </button> 
+                        </RouterLink>
                     </div>
-                    <RouterLink to="/">
-                        <button class="confirmBTN">
-                            <h1 :class="[ hover ? true : 'oppacity1', 'oppacity0']">Se Juntar Ao Esquadrão</h1>
-                        </button> 
+                </form>
+                <div class="register">
+                    <RouterLink to="/register">
+                        <h1>Ainda Não Faz Parte Do Esquadrão? Não Perca Mais Tempo Se Increva já</h1>
                     </RouterLink>
                 </div>
-            </form>
-            <div class="register">
-                <RouterLink to="/register">
-                    <h1>Ainda Não Faz Parte Do Esquadrão? Não Perca Mais Tempo Se Increva já</h1>
-                </RouterLink>
             </div>
-        </div>
+        </Transition>
     </div>
 </template>
 
@@ -39,13 +51,63 @@ export default {
     data() {
         return {
             hover: false,
+            mousePosX: 0,
+            mousePosY: 0,
         };
     },
+    mounted() {
+        document.addEventListener("mousemove", (event) => {
+            this.mousePosX = event.clientX / 40;
+            this.mousePosY = event.clientY / 40;
+            const obj1 = document.querySelector(".obj1");
+            obj1.style.left = `calc(60% + ${this.mousePosX}px)`;
+            obj1.style.top = `calc(20% + ${this.mousePosY}px)`;
+            const obj2 = document.querySelector(".obj2");
+            obj2.style.left = `calc(10% + ${this.mousePosX * -1}px)`;
+            obj2.style.top = `calc(60% + ${this.mousePosY * -1}px)`;
+        });
+
+        
+    }
 }
 </script>
 
+
 <style scoped>
-    div {
+
+    .LoginBehind {
+        color: white;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        font-family: 'Montserrat', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .obj1 {
+        position: absolute;
+        top: 20%;
+        left: 60%;
+        height: 150px;
+        width: 150px;
+    }
+    .obj2 {
+        position: absolute;
+        top: 60%;
+        left: 10%;
+        height: 150px;
+        width: 150px;
+    }
+    .LoginBehind img{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+    .LoginFront {
         min-width: none;
         width: 100vw;
         max-width: 768px;
@@ -57,9 +119,10 @@ export default {
         font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        text-align: center;
     }
     .login {
-        width: 1400px;
+        width: 768px;
         height: 60%;
         padding: 0;
         display: flex;
@@ -73,6 +136,7 @@ export default {
         margin-bottom: 3%;
         padding: 0;
         overflow: hidden;
+        transition: 950ms;
     }
 
     .image img {
@@ -85,7 +149,6 @@ export default {
         padding: 0;
         margin: 0;
         height: fit-content;
-        width: 115%;
         color: white;
         font-size: 12px;
         user-select: none;
@@ -94,6 +157,22 @@ export default {
     .welcome h1{
         color: white;
         font-size: 26px;
+        overflow: hidden;
+        border-right: .15em solid red;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: .15em;
+        animation: 
+            typing 3.5s steps(30, end),
+            blink-caret .5s step-end infinite;
+    }
+    @keyframes typing {
+        from { width: 0% }
+        to { width: 100% }
+    }
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: red }
     }
 
     .register {
@@ -110,7 +189,7 @@ export default {
     .register h1{
         font-family: 'Montserrat', sans-serif;
         color: white;
-        font-size: 14px;
+        font-size: 20px;
         font-weight: 100;
     }
     .form {
@@ -147,7 +226,7 @@ export default {
         width: 100%;
         text-decoration: none;
     }
-
+    
     .confirmBTN {
         height: 100%;
         width: 100%;
@@ -229,5 +308,20 @@ export default {
         font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .slide-fade-enter-active {
+        opacity: 1;
+        transition: all 1s ease-out;
+    }
+
+    .slide-fade-leave-active {
+        transition: all 0.8s;
+    }
+
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+        transform: translateX(220px);
+        opacity: 0;
     }
 </style>
