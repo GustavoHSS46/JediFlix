@@ -59,6 +59,7 @@ export default {
         font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        text-align: center;
     }
     .login {
         width: 1400px;
@@ -96,15 +97,30 @@ export default {
     .welcome h1{
         color: white;
         font-size: 26px;
+        overflow: hidden;
+        border-right: .15em solid red;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: .15em;
+        animation: 
+            typing 3.5s steps(30, end),
+            blink-caret .5s step-end infinite;
+    }
+    @keyframes typing {
+        from { width: 0% }
+        to { width: 90% }
+    }
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: red }
     }
 
     .loginH1 {
-        margin-top: 22%;
         position: relative;
         padding: 0;
         margin: 0;
         height: fit-content;
-        width: 100%;
+        width: fit-content;
         display: flex;
         justify-content: left;
         user-select: none;
@@ -113,7 +129,7 @@ export default {
     .loginH1 h1{
         font-family: 'Montserrat', sans-serif;
         color: white;
-        font-size: 16px;
+        font-size: 26px;
         font-weight: 100;
     }
     .form {
