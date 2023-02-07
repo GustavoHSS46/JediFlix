@@ -10,14 +10,18 @@
         <div class="moviedisplayInfo">
             <div class="moviePoster">
                 <div class="poster">
-                    <div class="cover">
-                        <img :src="this.cover" >
+                    <div  @mouseenter="hover = true" @mouseleave="hover = false" class="cover">
+                        <img :class="[ hover ? true : 'light', '']" class="dark" :src="this.cover" >
+                        <div :class="[ hover ? true : 'oppacity0', 'oppacity1']" class="iconplayer">
+                            <img src="../assets/play_arrow.svg" alt="">
+                        </div>
+                        
                     </div>
                     <p>Preço Do Ingresso:</p>
                     <h1>R${{this.price}},00</h1>
                 </div>
                 <router-link to="/">
-                    cancelar
+                    Cancelar
                 </router-link>
                 
             </div>
@@ -52,6 +56,7 @@ export default {
     props: ['id'],
     data() {
         return {
+            hover: false,
             name: '',
             category: '',
             cover: '',
@@ -126,7 +131,7 @@ export default {
         width: 100%;
         height: 150%;
         margin-top: -38rem;
-        background:linear-gradient(0deg, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+        background:linear-gradient(0deg, rgba(36, 39, 51, 1) 55%, rgba(0, 0, 0, 0) 100%);
     }
     .details {
         height: 100%;
@@ -201,11 +206,15 @@ export default {
         border-radius: 16px;
         overflow: hidden;
         margin-bottom: 15px;
+        cursor: pointer;
+        transition: 650ms;
+        background: black;;
     }
     .cover img {
         object-fit: cover;
         width: 100%;
         height: 100%;
+        filter: brightness(100%);
     }
     .moviePoster p {
         color: red;
@@ -217,6 +226,7 @@ export default {
     }
 
     .poster {
+        position: relative;;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -249,4 +259,40 @@ export default {
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .oppacity1 {
+        color: white;
+        opacity: 100%;
+    }
+    .oppacity0 {
+        color: white;
+        opacity: 0%;
+        
+    }
+
+    .iconplayer {
+        position: absolute;
+        top: 0;
+        width: 80%;
+        height: 90%;
+        border-radius: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 950ms;
+    }
+    .iconplayer img{
+        width: 50%;
+        height: 50%;
+        filter: invert(90%);
+    }
+
+
+    .dark{
+        opacity: 50%;
+        transition: 550ms;
+    }
+    .light{
+        opacity: 100%;
+        transition: 950ms;
+    }
 </style>
