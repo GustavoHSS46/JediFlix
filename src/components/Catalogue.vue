@@ -43,10 +43,10 @@ export default {
         justify-content: flex-start;
     }
     .gridMovies {
-        gap: 1.4rem;
+        gap: 5%;
         width: 100%;
         height: 90%;
-        
+        padding: 0;
         flex-wrap: wrap;
         display: flex;
         justify-content: center;
@@ -54,8 +54,8 @@ export default {
     }
 
     .movieCover {
-        width: 18%;
-        height: 40%;
+        width: 250px;
+        height: 350px;
         border-radius: 6px;
         box-sizing: border-box;
         box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
@@ -68,6 +68,9 @@ export default {
         height: 100%;
         width: 100%;
         object-fit: cover; 
+        object-position: center;
+        background-repeat: no-repeat;
+        object-position: 50% 10%;
     }
 
     .title {

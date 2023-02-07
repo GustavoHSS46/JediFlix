@@ -104,13 +104,13 @@ export default {
         flex-direction: row;
         min-height: none;
         height: 100%;
-        max-height: 900px;
+        max-height: 882px;
         min-width: none;
         width: 100%;
         max-width: 1440px;
         text-transform: uppercase;
         overflow: hidden;
-    }
+    } 
     .bg {
         position: absolute;
         left: 0;
