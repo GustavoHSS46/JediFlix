@@ -114,5 +114,8 @@ export default {
     }
     a img{
         object-fit: cover;
+        object-position: center;
+        background-repeat: no-repeat;
+        object-position: 50% 10%;
     }
 </style>
