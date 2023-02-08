@@ -4,7 +4,7 @@
             <div class="title">
                 <p>Nosso Catálogo</p>
             </div>
-            <div v-on:mouseover="hover = !hover" class="movieCover" v-for="movie in movies" :key="movie.id"> 
+            <div class="movieCover" v-for="movie in movies" :key="movie.id"> 
                 <router-link :to="{name: 'Movie', params: {id: movie.id}}">
                     <img :src="movie.frontCover" >
                 </router-link>
@@ -24,7 +24,6 @@ export default {
     data(){
         return {
             movies: [],
-            hover: false,
         }
     },
     mounted(){
@@ -43,24 +42,31 @@ export default {
         justify-content: flex-start;
     }
     .gridMovies {
-        gap: 5%;
         width: 100%;
         height: 90%;
-        padding: 0;
+        gap: 4%;
+        padding: 0 20px;
         flex-wrap: wrap;
         display: flex;
-        justify-content: center;
+        justify-content: left;
         align-items: center;
     }
 
     .movieCover {
-        width: 250px;
-        height: 350px;
-        border-radius: 6px;
+        
+        width: 275px;
+        height: 355px;
+        border-radius: 12px;
         box-sizing: border-box;
         box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
         cursor: pointer;
         overflow: hidden; 
+        transition: 450ms;
+    } 
+
+    .movieCover:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
     }
 
     .movieCover img {
