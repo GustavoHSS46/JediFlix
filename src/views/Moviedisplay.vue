@@ -7,11 +7,11 @@
             <div class="bgimgCover">
             </div>
         </div>
-        <div class="moviedisplayInfo">
+        <div :class="{ blur : click }" class="moviedisplayInfo">
             <div class="moviePoster">
                 <div class="poster">
-                    <div  @mouseenter="hover = true" @mouseleave="hover = false" class="cover">
-                        <img :class="[ hover ? true : 'light', '']" class="dark" :src="this.cover" >
+                    <div @click="click = !click" @mouseenter="hover = true" @mouseleave="hover = false" class="cover">
+                        <img :class="{  dark : hover , blur : click }" class="light" :src="this.cover" >
                         <div :class="[ hover ? true : 'oppacity0', 'oppacity1']" class="iconplayer">
                             <img src="../assets/play_arrow.svg" alt="">
                         </div>
@@ -45,18 +45,35 @@
                 </div>
                 
             </div>
-        </div>  
+            
+        </div> 
+        <Transition name="slide-fade" appear>
+        <div v-if="click" class="trailerMovie">
+            <div class="title">
+                <h1>{{ name }}</h1>
+                <span @click="click = !click" class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+            <Trailer/>
+        </div> 
+    </Transition>
     </div>
     
 </template>
 
 <script>
+import Trailer from "../components/Trailer";
 export default {
     name: 'Movie',
     props: ['id'],
+    components: {
+        Trailer,
+    },
     data() {
         return {
             hover: false,
+            click: false,
             name: '',
             category: '',
             cover: '',
@@ -85,9 +102,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
-
+<style scoped> 
     .moviedisplayMain {
         height: 100%;
         width: 100%;
@@ -315,12 +330,64 @@ export default {
     }
 
 
+    
+    .light{
+        opacity: 100%;
+        transition: 950ms;
+    }
     .dark{
         opacity: 50%;
         transition: 550ms;
     }
-    .light{
-        opacity: 100%;
-        transition: 950ms;
+
+    .title {
+        position: absolute;
+        left: 10%;
+        top: 3%;
+        z-index: 2;
+        width: 80%;
+        height: 10%;
+        font-size: 32px;
+        white-space: nowrap;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+    }
+    .title span {
+        font-size: 72px;
+        cursor: pointer;
+    }
+    .trailerMovie {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .slide-fade-enter-active {
+        transition: all .8s;
+    }
+
+    .slide-fade-leave-active {
+        transition: all .8s;
+    }
+
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+        transform: translateY(-220px);
+        opacity: 0;
+    }
+
+    .blur {
+        filter: blur(5px);
     }
 </style>
