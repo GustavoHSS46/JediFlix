@@ -1,6 +1,6 @@
 <template>
     <div class="moviedisplayMain">
-        <div class="bg">
+        <div :class="{ blur : click }" class="bg">
             <div class="bgimg">
                 <img :src="this.header" >
             </div>
@@ -50,7 +50,7 @@
         <Transition name="slide-fade" appear>
         <div v-if="click" class="trailerMovie">
             <div class="title">
-                <h1>{{ name }}</h1>
+                <h1>Trailer De {{ name }}</h1>
                 <span @click="click = !click" class="material-symbols-outlined">
                     close
                 </span>
@@ -339,7 +339,6 @@ export default {
         opacity: 50%;
         transition: 550ms;
     }
-
     .title {
         position: absolute;
         left: 10%;
@@ -347,7 +346,7 @@ export default {
         z-index: 2;
         width: 80%;
         height: 10%;
-        font-size: 32px;
+        font-size: 24px;
         white-space: nowrap;
         user-select: none;
         display: flex;
@@ -388,6 +387,6 @@ export default {
     }
 
     .blur {
-        filter: blur(5px);
+        filter: blur(15px);
     }
 </style>
