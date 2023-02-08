@@ -14,10 +14,10 @@
 export default {
     props: {
         title: String,
-        widthProps: Number,
-        heightProps: Number,
+        widthProps: String,
+        heightProps: String,
         measurements: String,
-        fontSize: Number,
+        fontSize: String,
         gifBackground: String,
     },
     data() {
