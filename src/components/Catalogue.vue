@@ -44,7 +44,6 @@ export default {
     .gridMovies {
         width: 100%;
         height: 90%;
-        gap: 4%;
         padding: 0 20px;
         flex-wrap: wrap;
         display: flex;
@@ -53,7 +52,7 @@ export default {
     }
 
     .movieCover {
-        
+        margin: 3%  1.5% 0 ;
         width: 275px;
         height: 355px;
         border-radius: 12px;
