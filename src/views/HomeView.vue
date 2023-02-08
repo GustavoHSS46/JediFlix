@@ -37,7 +37,7 @@ export default {
         timed () {
             setInterval(() => {
               this.isLoading = false;
-            }, 3000);
+            }, 2000);
         },
         
     },

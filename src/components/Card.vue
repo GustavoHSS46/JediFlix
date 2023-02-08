@@ -1,12 +1,15 @@
 <template>
-    <div :class="{ 'div-hover': hover }" @mouseenter="hover = true" @mouseleave="hover = false" :style="{'width': widthProps+ measurements, 'height': heightProps+ measurements, 'fontSize': fontSize+'px'}">
-        <h1>{{ title }}</h1>
-        <div v-if="hover" class="divhovering">
-            <Transition name="fade" appear>
-                <div :style="{backgroundImage: `url('${gifBackground}')` }" class="bgCards"></div>
-            </Transition>
-        </div>
-        
+    <div class="class" :class="{ 'div-hover': hover }" @mouseenter="hover = true" @mouseleave="hover = false"  :style="{'width': widthProps+ measurements, 'height': heightProps+ measurements, 'fontSize': fontSize+'px'}">
+        <RouterLink :to="{ name: 'CategoriesView', params: { type: this.title } }">
+            <div class="card">
+                <h1>{{ title }}</h1>
+                <div v-if="hover" class="divhovering">
+                    <Transition name="fade" appear>
+                        <div :style="{backgroundImage: `url('${gifBackground}')` }" class="bgCards"></div>
+                    </Transition>
+                </div>
+            </div>
+        </RouterLink>
     </div>
 </template>
 
@@ -32,7 +35,8 @@ export default {
     .div-hover {
         transform: scale(1.2);
     }
-    div{
+    .class{
+        position: relative;
         border-radius: 10px;
         display: flex;
         height: 100%;
@@ -44,23 +48,40 @@ export default {
         user-select: none;
         overflow: hidden;
         transition: 1550ms;
+        gap: 5%;
     }
-    div h1 {
+    a h1 {
+        text-decoration: none;
+        color:white;
+        height: 100%;
+        width: 100%;
         position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .class h1 {
         opacity: 100%;
     }
+    
+    
     .bgCards {
-        position: relative;
-        z-index: -99;
-        background-size: cover;
-    }
-    div img {
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
         z-index: -99;
         height: 100%;
         width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .bgCards img {
+        height: 100%;
+        width: 100%;
         object-fit: cover;
-        
     }
     .div-hover h1{
         opacity: 60%;
