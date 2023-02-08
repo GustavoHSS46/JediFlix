@@ -53,7 +53,6 @@ export default {
     }
 
     .movieCover {
-        
         width: 275px;
         height: 355px;
         border-radius: 12px;
