@@ -27,10 +27,15 @@ export default {
         }
     },
     mounted(){
-        fetch('https://jediflix-back-production.up.railway.app/films/category', {
-            category: this.type,
-        }).then(res => res.json()).then(data => this.movies = data).catch(err => console.log(err))
+        fetch('https://jediflix-back-production.up.railway.app/films').then(res => res.json()).then(data => this.movies = data).catch(err => console.log(err))
+        console.log(this.type)
     },
+    computed: {
+        evenNumbers() {
+            return this.newmovies = this.movies.map(movie => movie.category === this.type)
+        }
+    }
+
 }
 </script>
 
@@ -53,7 +58,7 @@ export default {
 
     .header {
         width: 100%;
-        height: 10%;
+        height: 100%;
         display: flex;
         align-items: center;
         flex-direction: row;

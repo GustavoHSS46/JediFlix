@@ -1,400 +1,416 @@
 <template>
-    <div class="moviedisplayMain">
-        <div :class="{ blur : click }" class="bg">
-            <div class="bgimg">
-                <img :src="this.header" >
-            </div>
-            <div class="bgimgCover">
-            </div>
-        </div>
-        <div :class="{ blur : click }" class="moviedisplayInfo">
-            <div class="moviePoster">
-                <div class="poster">
-                    <div @click="click = !click" @mouseenter="hover = true" @mouseleave="hover = false" class="cover">
-                        <img :class="{  dark : hover , blur : click }" class="light" :src="this.cover" >
-                        <div :class="[ hover ? true : 'oppacity0', 'oppacity1']" class="iconplayer">
-                            <img src="../assets/play_arrow.svg" alt="">
-                        </div>
-                        
-                    </div>
-                    <p>Preço Do Ingresso:</p>
-                    <h1>R${{this.price}},00</h1>
-                </div>
-                <router-link to="/">
-                    Cancelar
-                </router-link>
-                
-            </div>
-            <div class="details">
-                <div class="name">
-                    <h1>{{this.name}}</h1>
-                </div>
-                <div class="more">
-                    <div class="category">
-                        <p>categoria: {{this.category}}</p>
-                    </div>
-                    <div class="info">
-                        <p>data de lançamento: {{this.productedAt}}</p>
-                        <p>duração do filme: {{this.duration}}</p>
-                        <p>classificação: {{this.ageClassification}}</p>
-                    </div>
-                </div>
-                <div class="sinopse">
-                    <h2>sinopse:</h2>
-                    <p>{{this.overview}}</p>
-                </div>
-                
-            </div>
-            
-        </div> 
-        <Transition name="slide-fade" appear>
-        <div v-if="click" class="trailerMovie">
-            <div class="title">
-                <h1>Trailer De {{ name }}</h1>
-                <span @click="click = !click" class="material-symbols-outlined">
-                    close
-                </span>
-            </div>
-            <Trailer :trailer="details.film.trailerUrl"/>
-        </div> 
-    </Transition>
+  <div class="moviedisplayMain">
+    <div :class="{ blur: click }" class="bg">
+      <div class="bgimg">
+        <img :src="this.header" />
+      </div>
+      <div class="bgimgCover"></div>
     </div>
-    
+    <div :class="{ blur: click }" class="moviedisplayInfo">
+      <div class="moviePoster">
+        <div class="poster">
+          <div
+            @click="click = !click"
+            @mouseenter="hover = true"
+            @mouseleave="hover = false"
+            class="cover"
+          >
+            <img
+              :class="{ dark: hover, blur: click }"
+              class="light"
+              :src="this.cover"
+            />
+            <div
+              :class="[hover ? true : 'oppacity0', 'oppacity1']"
+              class="iconplayer"
+            >
+              <img src="../assets/play_arrow.svg" alt="" />
+            </div>
+          </div>
+          <p>Preço Do Ingresso:</p>
+          <h1>R${{ this.price }},00</h1>
+        </div>
+        <router-link to="/"> Cancelar </router-link>
+      </div>
+      <div class="details">
+        <div class="name">
+          <h1>{{ this.name }}</h1>
+        </div>
+        <div class="more">
+          <div class="category">
+            <p>categoria: {{ this.category }}</p>
+          </div>
+          <div class="info">
+            <p>data de lançamento: {{ this.productedAt }}</p>
+            <p>duração do filme: {{ this.duration }}</p>
+            <p>classificação: {{ this.ageClassification }}</p>
+          </div>
+        </div>
+        <div class="sinopse">
+          <h2>sinopse:</h2>
+          <p>{{ this.overview }}</p>
+        </div>
+      </div>
+    </div>
+    <Transition name="slide-fade" appear>
+      <div v-if="click" class="trailerMovie">
+        <div class="title">
+          <h1>Trailer De {{ name }}</h1>
+          <span @click="click = !click" class="material-symbols-outlined">
+            close
+          </span>
+        </div>
+        <Trailer />
+      </div>
+    </Transition>
+  </div>
 </template>
 
 <script>
-import axios from "axios"
 import Trailer from "../components/Trailer";
+import axios from "axios";
 export default {
-    name: 'Movie',
-    props: ['id'],
-    components: {
-        Trailer,
-    },
-    data() {
-        return {
-            hover: false,
-            click: false,
-            name: '',
-            category: '',
-            cover: '',
-            trailerUrl: '',
-            price: '',
-            header:'',
-            productedAt: '',
-            duration: '',
-            ageClassification: '',
-            overview: '',
-            uri: 'https://jediflix-back-production.up.railway.app/film/' + this.id
-        }
-    },
-    mounted() {
-        axios.get(this.uri).then(response => {
-            this.details = response.data;
-            
-            const { trailerUrl, name, headerImage, priceTicket, frontCover, category, productedAt, duration, ageClassification ,overview } = this.details.film;
-            this.name = name
-            this.header = headerImage
-            this.price = priceTicket
-            this.cover = frontCover
-            this.category = category
-            this.productedAt = productedAt
-            this.duration = duration
-            this.ageClassification = ageClassification
-            this.overview = overview
-            this.trailerUrl = trailerUrl
-            console.log(this.trailerUrl);
-        });
-    }
-}
-
+  name: "Movie",
+  props: ["id"],
+  components: {
+    Trailer,
+  },
+  data() {
+    return {
+      hover: false,
+      click: false,
+      name: "",
+      category: "",
+      cover: "",
+      price: "",
+      header: "",
+      productedAt: "",
+      duration: "",
+      ageClassification: "",
+      overview: "",
+      uri: "https://jediflix-back-production.up.railway.app/film/" + this.id,
+    };
+  },
+  mounted() {
+    axios
+      .get(this.uri)
+      .then((res) => res.data)
+      .then((data) => {
+        const {
+          name,
+          overview,
+          ageClassification,
+          category,
+          duration,
+          frontCover,
+          headerImage,
+          priceTicket,
+          productedAt,
+          trailerUrl,
+        } = data.film;
+        console.log(data.film);
+        console.log(name);
+        this.name = name;
+        this.category = category;
+        this.cover = frontCover;
+        this.price = priceTicket;
+        this.header = headerImage;
+        this.productedAt = productedAt;
+        this.duration = duration;
+        this.ageClassification = ageClassification;
+        this.overview = overview;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
 </script>
 
-<style scoped> 
-    .moviedisplayMain {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 5% 5%;
-    }
+<style scoped>
+.moviedisplayMain {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5% 5%;
+}
 
-    .moviedisplayInfo {
-        color: white;
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        min-height: none;
-        height: 100%;
-        max-height: 882px;
-        min-width: none;
-        width: 100%;
-        max-width: 1440px;
-        text-transform: uppercase;
-        overflow: hidden;
-    } 
-    .bg {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -10;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-    .bg img{
-        object-position: center;
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        object-position: 50% 10%;
-    }
-    .bgimg {
-        width: 100%;
-        height: 50%;
-    }
-    .bgimgCover {
-        position: absolute;
-        z-index: 2;
-        min-width: 100vw;
-        min-height: 150vh;
-        background:linear-gradient(0deg, rgba(20, 20, 20, 1) 75%, rgba(0, 0, 0, 0) 100%);
-    }
-    .details {
-        height: 100%;
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 7%;
-        padding: 20px 40px;
-    }
-    .name {
-        width: 100%;
-        height: fit-content;
-    }
-    .category {
-        width: 100%;
-        height: fit-content;
-    }
-    .info {
-        width: 100%;
-        margin-top: 10px;
-        gap: 2%;
-        height: fit-content;
-        display: flex;
-        flex-direction: row;
-    }
-    .info p{
-        font-weight: 400;
-        font-size: 14px;
-        opacity: 70%;
-    }
-    .more {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        height: fit-content;
-    }
-    .sinopse {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        max-height: 50%;
-        overflow-y: scroll;
-        padding: 0 15px;
-        transition: 1450ms;
-    }
-    .sinopse::-webkit-scrollbar {
-        margin-left: 15px;
-        width: 5px;
-    }
-    .sinopse::-webkit-scrollbar-track {
-        background: white;
-        box-shadow: inset 0 0 5px grey;
-        border-radius: 6px;
-    }
-    .sinopse::-webkit-scrollbar-thumb {
-        background: red;
-        border-radius: 6px;
-        
-    }
-    .sinopse::-webkit-scrollbar-thumb:hover {
-        background: rgb(164, 0, 0);
-    }
-    .sinopse h2 {
-        font-size: 24px;
-        color: white;
-        font-weight: 100;
-    }
-    .sinopse p {
-        margin-top: 10px;
-        font-size: 20px;
-        color: white;
-    }
+.moviedisplayInfo {
+  color: white;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  min-height: none;
+  height: 100%;
+  max-height: 882px;
+  min-width: none;
+  width: 100%;
+  max-width: 1440px;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -10;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.bg img {
+  object-position: center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  object-position: 50% 10%;
+}
+.bgimg {
+  width: 100%;
+  height: 50%;
+}
+.bgimgCover {
+  position: absolute;
+  z-index: 2;
+  min-width: 100vw;
+  min-height: 150vh;
+  background: linear-gradient(
+    0deg,
+    rgba(20, 20, 20, 1) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.details {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 7%;
+  padding: 20px 40px;
+}
+.name {
+  width: 100%;
+  height: fit-content;
+}
+.category {
+  width: 100%;
+  height: fit-content;
+}
+.info {
+  width: 100%;
+  margin-top: 10px;
+  gap: 2%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+.info p {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: 70%;
+}
+.more {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+.sinopse {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-height: 50%;
+  overflow-y: scroll;
+  padding: 0 15px;
+  transition: 1450ms;
+}
+.sinopse::-webkit-scrollbar {
+  margin-left: 15px;
+  width: 5px;
+}
+.sinopse::-webkit-scrollbar-track {
+  background: white;
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 6px;
+}
+.sinopse::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 6px;
+}
+.sinopse::-webkit-scrollbar-thumb:hover {
+  background: rgb(164, 0, 0);
+}
+.sinopse h2 {
+  font-size: 24px;
+  color: white;
+  font-weight: 100;
+}
+.sinopse p {
+  margin-top: 10px;
+  font-size: 20px;
+  color: white;
+}
 
-    .moviePoster{
-        min-width: 35%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
+.moviePoster {
+  min-width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .details{
-        width: 70%;
-        height: 100%;
-    }
+.details {
+  width: 70%;
+  height: 100%;
+}
 
-    .cover {
-        width: 80%;
-        height: 100%;
-        border-radius: 16px;
-        overflow: hidden;
-        margin-bottom: 15px;
-        cursor: pointer;
-        transition: 650ms;
-        background: black;;
-    }
-    .cover img {
-        object-position: center;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-    .moviePoster p {
-        color: red;
-        font-size: 18px;
-    }
-    .moviePoster h1 {
-        color: red;
-        font-size: 24px;
-    }
+.cover {
+  width: 80%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 650ms;
+  background: black;
+}
+.cover img {
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.moviePoster p {
+  color: red;
+  font-size: 18px;
+}
+.moviePoster h1 {
+  color: red;
+  font-size: 24px;
+}
 
-    .poster {
-        position: relative;;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 70%;
-    }
+.poster {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 70%;
+}
 
-    a {
-        cursor: default;
-        text-decoration: none;
-        width: 100%;
-        height: fit-content;
+a {
+  cursor: default;
+  text-decoration: none;
+  width: 100%;
+  height: fit-content;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  cursor: pointer;
+  width: 45%;
+  height: 50px;
+  font-size: 24px;
+  border-radius: 6px;
+  border: 1px solid red;
+  background: none;
+  color: red;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-        cursor: pointer;;
-        width: 45%;
-        height: 50px;
-        font-size: 24px;
-        border-radius: 6px;
-        border: 1px solid red;
-        background: none;
-        color: red;
-        text-transform: uppercase;
-        font-family: 'Montserrat', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+.oppacity1 {
+  color: white;
+  opacity: 100%;
+}
+.oppacity0 {
+  color: white;
+  opacity: 0%;
+}
 
-    .oppacity1 {
-        color: white;
-        opacity: 100%;
-    }
-    .oppacity0 {
-        color: white;
-        opacity: 0%;
-        
-    }
+.iconplayer {
+  position: absolute;
+  top: 0;
+  width: 80%;
+  height: 90%;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 950ms;
+}
+.iconplayer img {
+  width: 50%;
+  height: 50%;
+  filter: invert(90%);
+}
 
-    .iconplayer {
-        position: absolute;
-        top: 0;
-        width: 80%;
-        height: 90%;
-        border-radius: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: 950ms;
-    }
-    .iconplayer img{
-        width: 50%;
-        height: 50%;
-        filter: invert(90%);
-    }
+.light {
+  opacity: 100%;
+  transition: 950ms;
+}
+.dark {
+  opacity: 50%;
+  transition: 550ms;
+}
+.title {
+  position: absolute;
+  left: 10%;
+  top: 3%;
+  z-index: 2;
+  width: 80%;
+  height: 10%;
+  font-size: 24px;
+  white-space: nowrap;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+.title span {
+  font-size: 72px;
+  cursor: pointer;
+}
+.trailerMovie {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
 
+.slide-fade-enter-active {
+  transition: all 0.8s;
+}
 
-    
-    .light{
-        opacity: 100%;
-        transition: 950ms;
-    }
-    .dark{
-        opacity: 50%;
-        transition: 550ms;
-    }
-    .title {
-        position: absolute;
-        left: 10%;
-        top: 3%;
-        z-index: 2;
-        width: 80%;
-        height: 10%;
-        font-size: 24px;
-        white-space: nowrap;
-        user-select: none;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-align: center;
-    }
-    .title span {
-        font-size: 72px;
-        cursor: pointer;
-    }
-    .trailerMovie {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100vh;
-        width: 100vw;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-    }
+.slide-fade-leave-active {
+  transition: all 0.8s;
+}
 
-    .slide-fade-enter-active {
-        transition: all .8s;
-    }
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-220px);
+  opacity: 0;
+}
 
-    .slide-fade-leave-active {
-        transition: all .8s;
-    }
-
-    .slide-fade-enter-from,
-    .slide-fade-leave-to {
-        transform: translateY(-220px);
-        opacity: 0;
-    }
-
-    .blur {
-        filter: blur(15px);
-    }
+.blur {
+  filter: blur(15px);
+}
 </style>

@@ -1,27 +1,18 @@
 <template>
     <div class="trailerMain">
         <div class="trailer">
-            <h1>{{ trailer }}</h1>
-            <video width="320" height="240" controls>
-                <source :src="this.ytUrl.replace('/watch?v=', '/embed/')" type="video/mp4">
+            <video width="320" height="240" autoplay loop>
+                <source src="https://vod-bgc-sa-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564676115-marvel.mp4" type="video/mp4">
+                    
+                Your browser does not support the video tag.
             </video>
+                
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    props: {
-        trailer: String
-    }, 
-    data() {
-        return {
-            ytUrl:''
-        }
-    },
-    created() {
-        this.ytUrl = "https://www.youtube.com/watch?v=p9lmqoZTQOM"
-    }
 }
 
 </script>
@@ -35,7 +26,6 @@ export default {
         align-items: center;
         width: 100%;
         height: 100%;
-        user-select: none;
     }
 
     .trailer {
@@ -49,9 +39,6 @@ export default {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border: none;
-        outline: none;
-
     }
 
 </style>

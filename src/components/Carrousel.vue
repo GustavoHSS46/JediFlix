@@ -97,7 +97,6 @@ export default {
         object-position: center;
         background-repeat: no-repeat;
         object-position: 50% 10%;
-        image-rendering: smooth;
     }
 
     p{
