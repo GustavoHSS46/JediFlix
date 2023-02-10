@@ -55,7 +55,7 @@
                     close
                 </span>
             </div>
-            <Trailer/>
+            <Trailer :trailer="details.film.trailerUrl"/>
         </div> 
     </Transition>
     </div>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import axios from "axios"
 import Trailer from "../components/Trailer";
 export default {
     name: 'Movie',
@@ -77,6 +78,7 @@ export default {
             name: '',
             category: '',
             cover: '',
+            trailerUrl: '',
             price: '',
             header:'',
             productedAt: '',
@@ -87,19 +89,25 @@ export default {
         }
     },
     mounted() {
-        fetch(this.uri).then(res => res.json()).then(data => {
-            this.name = data.name
-            this.header = data.headerImage
-            this.price = data.price
-            this.cover = data.frontCover
-            this.category = data.category
-            this.productedAt = data.productedAt
-            this.duration = data.duration
-            this.ageClassification = data.ageClassification
-            this.overview = data.overview
-        })
+        axios.get(this.uri).then(response => {
+            this.details = response.data;
+            
+            const { trailerUrl, name, headerImage, priceTicket, frontCover, category, productedAt, duration, ageClassification ,overview } = this.details.film;
+            this.name = name
+            this.header = headerImage
+            this.price = priceTicket
+            this.cover = frontCover
+            this.category = category
+            this.productedAt = productedAt
+            this.duration = duration
+            this.ageClassification = ageClassification
+            this.overview = overview
+            this.trailerUrl = trailerUrl
+            console.log(this.trailerUrl);
+        });
     }
 }
+
 </script>
 
 <style scoped> 

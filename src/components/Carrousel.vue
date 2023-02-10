@@ -31,7 +31,7 @@ export default {
     methods: {
         timed () {
             setInterval(() => {
-                if (this.xValue > 800) {
+                if (this.xValue > this.movies.length) {
                     this.xValue = 0;
                     this.id = 1;
                 } else {
@@ -97,6 +97,7 @@ export default {
         object-position: center;
         background-repeat: no-repeat;
         object-position: 50% 10%;
+        image-rendering: smooth;
     }
 
     p{
