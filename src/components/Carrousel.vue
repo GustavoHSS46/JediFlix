@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -28,7 +29,8 @@ export default {
       g: 0,
       b: 0,
       id: 1,
-      
+      length: 0,
+      uri: "https://jediflix-back-production.up.railway.app/films",
     };
   },
   mounted() {
@@ -38,10 +40,9 @@ export default {
       .catch((err) => console.log(err));
   },
   methods: {
-      timed() {
-        
+    timed() {
       setInterval(() => {
-        if (this.xValue > 200) {
+        if (this.xValue > 100) {
           this.xValue = 0;
           this.id = 1;
         } else {

@@ -13,6 +13,12 @@
 
 <script>
 export default {
+    props: {
+        trailer: String
+    },
+    created() {
+        console.log(this.trailer)
+    }
 }
 
 </script>
