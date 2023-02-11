@@ -16,7 +16,7 @@
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: rgb(26, 29, 41);
   display: flex;
   justify-content: center;
@@ -31,8 +31,8 @@ body {
   width: 100%;
   max-width: 1440px;
   height: 100vh; 
-  overflow-y: scroll;
   display: flex;
   justify-content: center;
 }
+
 </style>
