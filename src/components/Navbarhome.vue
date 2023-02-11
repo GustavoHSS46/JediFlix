@@ -18,9 +18,13 @@
             <span :class="{ activeSettings : isActiveSettings }" @click="isActiveSettings = !isActiveSettings" class="settingsSpan material-symbols-outlined">
                 settings
             </span>
-            <Transition :duration="950" name="slide-fade-settings">
+            <Transition name="slide-fade-settings">
                 <div v-if="isActiveSettings === true" class="settingsSide">
-                    <h3>Settings</h3>
+                    <Transition name="slide-fade-Innersettings">
+                        <div class="innerSettings">
+                            <h3>Settings</h3>
+                        </div>
+                    </Transition>
                 </div>
             </Transition>
         </div>
@@ -96,7 +100,7 @@ export default {
     .activeSettings {
         transition: 1450ms;
         rotate: 65deg;
-        margin-right: 82%;
+        margin-right: 120px;
         color:red;
     }
 
@@ -150,17 +154,32 @@ export default {
 
     .slide-fade-settings-enter-from,
     .slide-fade-settings-leave-to {
-        transform: translateX(120px);
         opacity: 0;
         width: 0%;
         height: 0%;
+    }
+
+    .slide-fade-Innersettings-enter-active {
+        transition: all 2.8s ease-out;
+    }
+
+    .slide-fade-Innersettings-leave-active {
+        transition: all 2.8s ease-out;
+    }
+
+    .slide-fade-Innersettings-enter-from {
+        transform: translateY(-120px);
+    }
+
+    .slide-fade-Innersettings-leave-to {
+        transform: translateY(120px);
     }
 
     .settingsSide {
         box-sizing: border-box;
         position: absolute;
         z-index: 999;
-        width: 33%;
+        width: 100%;
         top: 0;
         right: 0%;
         height: 100%;
@@ -169,7 +188,15 @@ export default {
         justify-content: right;
         align-items: flex-start;
         padding: 18px 20px;
-        background: rgb(225, 225, 225);
-        color:black;
+        background: rgba(0, 0, 0, 0.7);;
+        color:red;
+    }
+    .innerSettings {
+        position: absolute;
+        top: 0;
+        width: 30%;
+        height: 60%;
+        background-color: aliceblue;
+        padding: 22px 30px;
     }
 </style>
