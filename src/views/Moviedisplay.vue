@@ -48,7 +48,7 @@
         </div>
         <div class="sinopse">
           <h2>sinopse:</h2>
-          <p>{{ this.overview }}</p>
+          <p>{{ overview }}</p>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
             close
           </span>
         </div>
-        <Trailer />
+        <Trailer :trailer="this.trailer"/>
       </div>
     </Transition>
   </div>
@@ -108,8 +108,8 @@ export default {
           productedAt,
           trailerUrl,
         } = data.film;
-        console.log(data.film);
-        console.log(name);
+        console.log(trailerUrl);
+        console.log(ageClassification);
         this.name = name;
         this.category = category;
         this.cover = frontCover;
@@ -119,6 +119,7 @@ export default {
         this.duration = duration;
         this.ageClassification = ageClassification;
         this.overview = overview;
+        this.trailer = trailerUrl;
       })
       .catch((error) => {
         console.log(error);
@@ -129,13 +130,15 @@ export default {
 
 <style scoped>
 .moviedisplayMain {
+  position: absolute;;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5% 5%;
+  overflow: hidden;
 }
 
 
@@ -206,14 +209,14 @@ export default {
 .info {
   width: 100%;
   margin-top: 10px;
-  gap: 2%;
+  gap: 22px;
   height: fit-content;
   display: flex;
   flex-direction: row;
 }
 .info p {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 20px;
   opacity: 70%;
 }
 .more {
@@ -331,6 +334,11 @@ a {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a:hover {
+  background-image: url(../assets/1608229455-star-wars.gif);
+  opacity: 60%;
+}
+
 .oppacity1 {
   color: white;
   opacity: 100%;
@@ -415,7 +423,7 @@ a {
 
 .slide-fade-leave-to {
   opacity: 0;
-  transform: translateY(170px);
+  transform: translateY(220px);
   filter: blur(15px);
 }
 
