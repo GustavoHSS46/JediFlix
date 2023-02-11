@@ -28,6 +28,7 @@ export default {
       g: 0,
       b: 0,
       id: 1,
+      
     };
   },
   mounted() {
@@ -37,9 +38,10 @@ export default {
       .catch((err) => console.log(err));
   },
   methods: {
-    timed() {
+      timed() {
+        
       setInterval(() => {
-        if (this.xValue > movies.length) {
+        if (this.xValue > 200) {
           this.xValue = 0;
           this.id = 1;
         } else {
