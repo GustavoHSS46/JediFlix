@@ -10,7 +10,7 @@
   <div class="LoginFront">
     <Transition name="slide-fade" appear>
       <div class="login">
-        <div :style="up" class="image">
+        <div class="image">
           <img
             src="https://icon-library.com/images/star-wars-icon-png/star-wars-icon-png-9.jpg"
             alt=""
@@ -236,7 +236,7 @@ a {
 input[type="submit"] {
   background: rgb(167, 0, 0);
   color: white;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
