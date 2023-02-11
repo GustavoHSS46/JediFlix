@@ -129,8 +129,9 @@ export default {
 
 <style scoped>
 .moviedisplayMain {
-  height: 100%;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -388,6 +389,7 @@ a {
   top: 0;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
   color: white;
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;
@@ -397,17 +399,23 @@ a {
 }
 
 .slide-fade-enter-active {
-  transition: all 0.8s;
+  transition: all 1.5s;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s;
+  transition: all 1.5s;
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.slide-fade-enter-from {
   transform: translateY(-220px);
+  filter: blur(15px);
   opacity: 0;
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(170px);
+  filter: blur(15px);
 }
 
 .blur {

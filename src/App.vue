@@ -16,7 +16,7 @@
 }
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: rgb(26, 29, 41);
   display: flex;
   justify-content: center;
@@ -27,10 +27,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #101935;
-  width: clamp(768px, 1440%, 1440px);
+  min-width: none;
+  width: 100%;
+  max-width: 1440px;
   height: 100vh; 
+  overflow-y: scroll;
   display: flex;
   justify-content: center;
-  border: 3px solid red;
 }
 </style>
