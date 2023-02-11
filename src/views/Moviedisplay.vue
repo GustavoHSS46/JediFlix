@@ -138,6 +138,7 @@ export default {
   padding: 5% 5%;
 }
 
+
 .moviedisplayInfo {
   color: white;
   padding: 0;
