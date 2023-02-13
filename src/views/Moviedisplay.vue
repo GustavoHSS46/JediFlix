@@ -337,6 +337,9 @@ a {
 a:hover {
   background-image: url(../assets/1608229455-star-wars.gif);
   opacity: 60%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .oppacity1 {
