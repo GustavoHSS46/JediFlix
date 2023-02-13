@@ -1,5 +1,19 @@
 <template>
-  <div>
+  <div class="mainRegister">
+    <div v-if="wrongPassword">
+      <div class="blurBG"></div>
+      <div class="astronaut">
+        <lottie-player
+          src="https://assets5.lottiefiles.com/packages/lf20_gy6w24sr.json"
+          background="transparent"
+          speed="1"
+          style="width: 1024px; height: 1024px"
+          loop
+          autoplay
+        ></lottie-player>
+        <h1>Something Is Wrong</h1>
+      </div>
+    </div>
     <div class="login">
       <div class="image">
         <img
@@ -36,7 +50,7 @@
         />
 
         <input
-          @click="checkPassword"
+          @click="checkPass()"
           type="submit"
           class="confirmBTN"
           value="Entrar No Esquadrão"
@@ -53,17 +67,33 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       hover: false,
+      wrongPassword: true,
+      animation: "",
     };
+  },
+  methods: {
+    checkPass() {
+      var pass = document.getElementById("password").value;
+      var rpass = document.getElementById("Confirmpassword").value;
+      if (pass != rpass) {
+        console.log("Good");
+        this.wrongPassword = true;
+        reload();
+      } else {
+        console.log("Not Good");
+        alert("Senhas Diferentes");
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-div {
+.mainRegister {
   min-width: none;
   width: 100vw;
   max-width: 768px;
@@ -76,6 +106,29 @@ div {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+.blurBG {
+  position: absolute;
+  z-index: 998;
+  left: 0;
+  top: 0;
+  filter: blur(15px);
+}
+
+.astronaut {
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: red;
 }
 .login {
   width: 1400px;
