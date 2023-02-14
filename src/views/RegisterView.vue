@@ -12,7 +12,9 @@
             autoplay
           ></lottie-player>
           <h1>Something Is Wrong</h1>
-          <button @click="wrongPassword = !wrongPassword" class="errorLoading">Try Again</button>
+          <button @click="wrongPassword = !wrongPassword" class="errorLoading">
+            Try Again
+          </button>
         </div>
       </div>
     </div>
@@ -35,11 +37,11 @@
           required
         />
 
-        <input 
+        <input
           id="email"
-          type="email" 
-          placeholder="Entre Com Seu Email" 
-          required 
+          type="email"
+          placeholder="Entre Com Seu Email"
+          required
         />
 
         <input
@@ -83,7 +85,7 @@ export default {
       hover: false,
       wrongPassword: false,
       animation: "",
-      uri: "https://jediflix-back-production.up.railway.app/register" 
+      uri: "https://jediflix-back-production.up.railway.app/register",
     };
   },
   methods: {
@@ -96,17 +98,21 @@ export default {
       }
     },
     Submit() {
-      this.checkPass()
+      this.checkPass();
       const promise = axios.post(this.uri, {
         email: document.getElementById("email").value,
         name: document.getElementById("name").value,
         password: document.getElementById("password").value,
-      })
-      promise.then((response) => {console.log(response.data)}).catch((error) => {alert(error)})  
+      });
+      promise
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push('/login')
+        })
+        .catch((error) => {
+          alert(error);
+        });
     },
-    function(event) {
-      event.preventDefault();
-    }
   },
 };
 </script>
@@ -225,7 +231,7 @@ export default {
 }
 .form input::placeholder {
   color: red;
-  font-size: 20px;
+  font-size: 32px;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -350,7 +356,7 @@ input[type="submit"] {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   background-blend-mode: darken;
 }
 .errorLoading {
