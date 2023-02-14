@@ -21,15 +21,22 @@
             <h1>Soldado, Corra O Esquadrão JediFlix Precisa De Você</h1>
           </Transition>
         </div>
-        <form class="form" @submit.prevent="false" to="/register">
-          <input type="email" placeholder="Entre Com Seu Email" required />
+        <form class="form" @submit.stop.prevent>
           <input
+            id="email"
+            type="email"
+            placeholder="Entre Com Seu Email"
+            required
+          />
+          <input
+            id="password"
             type="password"
             placeholder="Entre Com Sua Senha"
             minlength="6"
             required
           />
           <input
+            @click="check()"
             type="submit"
             value="Se Juntar Ao Esquadrão"
             class="confirmBTN"
@@ -49,6 +56,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Login",
   data() {
@@ -56,19 +64,24 @@ export default {
       hover: false,
       mousePosX: 0,
       mousePosY: 0,
+      uri: "https://jediflix-back-production.up.railway.app/login",
     };
   },
-  mounted() {
-    document.addEventListener("mousemove", (event) => {
-      this.mousePosX = event.clientX / 40;
-      this.mousePosY = event.clientY / 40;
-      const obj1 = document.querySelector(".obj1");
-      obj1.style.left = `calc(60% + ${this.mousePosX}px)`;
-      obj1.style.top = `calc(20% + ${this.mousePosY}px)`;
-      const obj2 = document.querySelector(".obj2");
-      obj2.style.left = `calc(10% + ${this.mousePosX * -1}px)`;
-      obj2.style.top = `calc(60% + ${this.mousePosY * -1}px)`;
-    });
+  methods: {
+    check() {
+      const promise = axios.post(this.uri, {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      });
+      promise
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
   },
 };
 </script>
@@ -217,11 +230,13 @@ export default {
   display: flex;
   flex-direction: column;
   color: red;
-  font-size: 20px;
+  font-size: 32px;
+  transition: 450ms;
 }
 .form input::placeholder {
   color: red;
-  font-size: 20px;
+  font-size: 32px;
+  transition: 450ms;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
