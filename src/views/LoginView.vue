@@ -62,8 +62,6 @@ export default {
   data() {
     return {
       hover: false,
-      mousePosX: 0,
-      mousePosY: 0,
       uri: "https://jediflix-back-production.up.railway.app/login",
     };
   },
@@ -75,11 +73,18 @@ export default {
       });
       promise
         .then((response) => {
-          console.log(response.data);
+          localStorage.setItem('@token', response.data.token);
           this.$router.push('/')
+          console.log(localStorage.getItem('@token'));
         })
         .catch((error) => {
-          alert(error);
+          console.log(error.message)
+          if (error.response.status === 404) {
+            alert("Usuario Não Cadastrado")
+          }
+          if (error.response.status === 401) {
+            alert("Usuario Ou Senha Incorreta, Tente Novamente")
+          }
         });
     },
   },
