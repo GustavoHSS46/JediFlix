@@ -8,6 +8,9 @@
     </div>
     <div v-if="error">
       <Popup errorText="Usuario Já Cadastrado"/>
+      <div class="astronaut">
+        <button @click="error = !error" class="errorLoading">Tente Novamente</button>
+      </div>
     </div>
     <div class="login">
       <div class="image">
@@ -128,7 +131,7 @@ export default {
 }
 
 .errorLoading {
-  margin-top: 50px;
+  margin-top: 15%;
   width: 25%;
   height: 8%;
   background-color: rgb(26, 26, 26);

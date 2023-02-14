@@ -53,15 +53,37 @@
       </div>
     </Transition>
   </div>
+  <div v-if="password">
+    <Popup errorText="Usuario Ou Senha Incorreta" />
+    <div class="astronaut">
+      <button @click="password = !password" class="errorLoading">
+        Tente Novamente
+      </button>
+    </div>
+  </div>
+  <div v-if="error">
+    <Popup errorText="Usuario Não Encontrado" />
+    <div class="astronaut">
+      <button @click="error = !error" class="errorLoading">
+        Tente Novamente
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import Popup from "../components/Popup";
 export default {
   name: "Login",
+  components: {
+    Popup,
+  },
   data() {
     return {
       hover: false,
+      password: false,
+      error: false,
       uri: "https://jediflix-back-production.up.railway.app/login",
     };
   },
@@ -73,17 +95,17 @@ export default {
       });
       promise
         .then((response) => {
-          localStorage.setItem('@token', response.data.token);
-          this.$router.push('/')
-          console.log(localStorage.getItem('@token'));
+          localStorage.setItem("@token", response.data.token);
+          this.$router.push("/");
+          console.log(localStorage.getItem("@token"));
         })
         .catch((error) => {
-          console.log(error.message)
+          console.log(error.message);
           if (error.response.status === 404) {
-            alert("Usuario Não Cadastrado")
+            this.error = true;
           }
           if (error.response.status === 401) {
-            alert("Usuario Ou Senha Incorreta, Tente Novamente")
+            this.password = true;
           }
         });
     },
@@ -92,6 +114,35 @@ export default {
 </script>
 
 <style scoped>
+
+.astronaut {
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.errorLoading {
+  margin-top: 15%;
+  width: 25%;
+  height: 8%;
+  background-color: rgb(26, 26, 26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 26px;
+  cursor: pointer;
+}
 .LoginBehind {
   color: white;
   position: absolute;

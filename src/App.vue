@@ -27,9 +27,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #101935;
-  min-width: none;
-  width: 100%;
-  max-width: 1440px;
+  width: clamp(none, 100%, 1440px);
   height: 100vh; 
   display: flex;
   justify-content: center;
