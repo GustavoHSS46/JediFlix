@@ -1,17 +1,19 @@
 <template>
   <div class="mainRegister">
     <div v-if="wrongPassword">
-      <div class="blurBG"></div>
       <div class="astronaut">
-        <lottie-player
-          src="https://assets5.lottiefiles.com/packages/lf20_gy6w24sr.json"
-          background="transparent"
-          speed="1"
-          style="width: 1024px; height: 1024px"
-          loop
-          autoplay
-        ></lottie-player>
-        <h1>Something Is Wrong</h1>
+        <div class="cards">
+          <lottie-player
+            src="https://assets5.lottiefiles.com/packages/lf20_gy6w24sr.json"
+            background="transparent"
+            speed="0.5"
+            style="width: 70%; height: 70%"
+            loop
+            autoplay
+          ></lottie-player>
+          <h1>Something Is Wrong</h1>
+          <button @click="wrongPassword = !wrongPassword" class="errorLoading">Try Again</button>
+        </div>
       </div>
     </div>
     <div class="login">
@@ -24,15 +26,22 @@
       <div class="welcome">
         <h1>Soldado, Fale Um Pouco Sobre Você</h1>
       </div>
-      <form class="form">
+      <form class="form" @submit.prevent>
         <input
           type="text"
           placeholder="Entre Com Seu Nome"
           minlength="6"
+          id="name"
           required
         />
 
-        <input type="email" placeholder="Entre Com Seu Email" required />
+        <input 
+          id="email"
+          type="email" 
+          placeholder="Entre Com Seu Email" 
+          required 
+        />
+
         <input
           type="password"
           id="password"
@@ -50,7 +59,7 @@
         />
 
         <input
-          @click="checkPass()"
+          @click="Submit()"
           type="submit"
           class="confirmBTN"
           value="Entrar No Esquadrão"
@@ -66,28 +75,38 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Register",
   data() {
     return {
       hover: false,
-      wrongPassword: true,
+      wrongPassword: false,
       animation: "",
+      uri: "https://jediflix-back-production.up.railway.app/register" 
     };
   },
   methods: {
     checkPass() {
-      var pass = document.getElementById("password").value;
-      var rpass = document.getElementById("Confirmpassword").value;
+      let pass = document.getElementById("password").value;
+      let rpass = document.getElementById("Confirmpassword").value;
       if (pass != rpass) {
         console.log("Good");
         this.wrongPassword = true;
-        reload();
-      } else {
-        console.log("Not Good");
-        alert("Senhas Diferentes");
       }
     },
+    Submit() {
+      this.checkPass()
+      const promise = axios.post(this.uri, {
+        email: document.getElementById("email").value,
+        name: document.getElementById("name").value,
+        password: document.getElementById("password").value,
+      })
+      promise.then((response) => {console.log(response.data)}).catch((error) => {alert(error)})  
+    },
+    function(event) {
+      event.preventDefault();
+    }
   },
 };
 </script>
@@ -108,14 +127,6 @@ export default {
   text-align: center;
 }
 
-.blurBG {
-  position: absolute;
-  z-index: 998;
-  left: 0;
-  top: 0;
-  filter: blur(15px);
-}
-
 .astronaut {
   position: absolute;
   z-index: 999;
@@ -123,7 +134,6 @@ export default {
   top: 0;
   width: 100vw;
   height: 100vh;
-  border: 2px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -157,7 +167,8 @@ export default {
   padding: 0;
   margin: 0;
   height: fit-content;
-  width: 115%;
+  width: fit-content;
+  white-space: nowrap;
   color: white;
   font-size: 12px;
   user-select: none;
@@ -210,7 +221,7 @@ export default {
   display: flex;
   flex-direction: column;
   color: red;
-  font-size: 20px;
+  font-size: 32px;
 }
 .form input::placeholder {
   color: red;
@@ -323,5 +334,38 @@ input[type="submit"] {
   color: white;
   font-size: 26px;
   font-weight: 100;
+}
+
+.cards {
+  width: 75%;
+  height: 85%;
+  background-color: rgb(167, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  flex-direction: column;
+  border-radius: 26px;
+  background-image: url(../assets/1608229455-star-wars.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0,0,0,0.6);
+  background-blend-mode: darken;
+}
+.errorLoading {
+  margin-top: 50px;
+  width: 25%;
+  height: 8%;
+  background-color: rgb(26, 26, 26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 26px;
+  cursor: pointer;
 }
 </style>
