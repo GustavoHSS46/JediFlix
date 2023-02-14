@@ -46,9 +46,30 @@
             <p>classificação: {{ this.ageClassification }}</p>
           </div>
         </div>
-        <div class="sinopse">
-          <h2>sinopse:</h2>
-          <p>{{ overview }}</p>
+        <div class="buttonSeats">
+          <Transition name="fade">
+            <button
+              :class="[seats ? true : 'nextActive', 'notNextActive']"
+              @click="seats = !seats"
+            >
+              Proximo
+            </button>
+          </Transition>
+          <button
+            :class="[seats ? true : 'notActive', 'Active']"
+            @click="seats = !seats"
+          >
+            Mostrar Lugares
+          </button>
+        </div>
+        <div class="container">
+          <div v-if="seats" class="seats">
+            <h1>macaco</h1>
+          </div>
+          <div v-else class="sinopse">
+            <h2>sinopse:</h2>
+            <p>{{ overview }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -60,7 +81,7 @@
             close
           </span>
         </div>
-        <Trailer :trailer="this.trailer"/>
+        <Trailer :trailer="this.trailer" />
       </div>
     </Transition>
   </div>
@@ -77,6 +98,7 @@ export default {
   },
   data() {
     return {
+      seats: false,
       hover: false,
       click: false,
       name: "",
@@ -129,8 +151,86 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-height: 55%;
+  text-align: center;
+  overflow: hidden;
+  transition: 1450ms;
+}
+.buttonSeats {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  transition: 450ms;
+}
+.Active {
+  white-space: nowrap;
+  position: absolute;
+  border: none;
+  background-color: crimson;
+  outline: none;
+  color: white;
+  font-size: 32px;
+  left: 0%;
+  height: 100%;
+  width: 35%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 450ms;
+}
+.nextActive {
+  position: absolute;
+  border: none;
+  background-color: grey;
+  outline: none;
+  color: black;
+  font-size: 32px;
+  height: 100%;
+  left: 28%;
+  width: 20%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 650ms;
+}
+.notNextActive {
+  position: absolute;
+  border: none;
+  background-color: greenyellow;
+  outline: none;
+  color: black;
+  font-size: 32px;
+  height: 100%;
+  right: 0;
+  width: 20%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 650ms;
+}
+
+.notActive {
+  position: absolute;
+  border: none;
+  background-color: greenyellow;
+  outline: none;
+  color: black;
+  font-size: 32px;
+  height: 100%;
+  left: 28%;
+  width: 50%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 450ms;
+}
 .moviedisplayMain {
-  position: absolute;;
+  position: absolute;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -140,7 +240,6 @@ export default {
   padding: 5% 5%;
   overflow: hidden;
 }
-
 
 .moviedisplayInfo {
   color: white;
@@ -230,13 +329,12 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: left;
-  max-height: 50%;
+  height: fit-content;
   overflow-y: scroll;
   padding: 0 15px;
-  transition: 1450ms;
 }
 .sinopse::-webkit-scrollbar {
-  margin-left: 15px;
+  margin-left: 35px;
   width: 5px;
 }
 .sinopse::-webkit-scrollbar-track {
@@ -428,6 +526,16 @@ a:hover {
   opacity: 0;
   transform: translateY(220px);
   filter: blur(15px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .blur {
