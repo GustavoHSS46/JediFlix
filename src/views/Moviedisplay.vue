@@ -47,28 +47,48 @@
           </div>
         </div>
         <div class="buttonSeats">
-          <Transition name="fade">
-            <button
-              :class="[seats ? true : 'nextActive', 'notNextActive']"
-              @click="seats = !seats"
-            >
-              Proximo
-            </button>
-          </Transition>
           <button
             :class="[seats ? true : 'notActive', 'Active']"
             @click="seats = !seats"
           >
             Mostrar Lugares
           </button>
+          <button
+            :class="[seats ? true : 'notActiveCancel', 'ActiveCancel']"
+            @click="seats = !seats"
+            class="ActiveCancel"
+          >
+            Cancelar Lugares
+          </button>
         </div>
         <div class="container">
           <div v-if="seats" class="seats">
-            <h1>macaco</h1>
+            <Transition name="slide-fade-overview1" appear>
+              <div class="poltronasSelect">
+                <h1>Suas Poltronas:</h1>
+                <h1>{{ this.selects }}</h1>
+              </div>
+            </Transition>
+            <Transition name="slide-fade-overview" appear>
+              <div class="seatsContainer">
+                <div
+                  @click="nigga(seat.name)"
+                  class="seat"
+                  v-for="seat in dataSeats"
+                  :key="seat.id"
+                >
+                  <h1>{{ seat.name }}</h1>
+                </div>
+              </div>
+            </Transition>
           </div>
           <div v-else class="sinopse">
-            <h2>sinopse:</h2>
-            <p>{{ overview }}</p>
+            <Transition name="slide-fade-overview" appear>
+              <h2>sinopse:</h2>
+            </Transition>
+            <Transition name="slide-fade-overview1" appear>
+              <p>{{ overview }}</p>
+            </Transition>
           </div>
         </div>
       </div>
@@ -98,9 +118,14 @@ export default {
   },
   data() {
     return {
+      active: false,
+      selectSeats: [],
+      dataSeats: [],
+      dataFilm: [],
       seats: false,
       hover: false,
       click: false,
+      nameSeats: "",
       name: "",
       category: "",
       cover: "",
@@ -108,16 +133,18 @@ export default {
       header: "",
       productedAt: "",
       duration: "",
+      isAvailable: "",
       ageClassification: "",
       overview: "",
       uri: "https://jediflix-back-production.up.railway.app/film/" + this.id,
+      selects: "",
     };
   },
   mounted() {
     axios
       .get(this.uri)
-      .then((res) => res.data)
-      .then((data) => {
+      .then((res) => {
+        this.dataFilm = res.data.film;
         const {
           name,
           overview,
@@ -129,9 +156,7 @@ export default {
           priceTicket,
           productedAt,
           trailerUrl,
-        } = data.film;
-        console.log(trailerUrl);
-        console.log(ageClassification);
+        } = this.dataFilm;
         this.name = name;
         this.category = category;
         this.cover = frontCover;
@@ -142,25 +167,28 @@ export default {
         this.ageClassification = ageClassification;
         this.overview = overview;
         this.trailer = trailerUrl;
+
+        this.dataSeats = res.data.seats;
       })
       .catch((error) => {
         console.log(error);
       });
   },
+  methods: {
+    nigga: function (seatId) {
+      console.log(seatId);
+      this.selectSeats.push(Number(seatId));
+      for (let i = 0; i < seatId; i++) {
+        console.log("numero não incluido" + seatId);
+      }
+      console.log("selecionado " + this.selectSeats.sort());
+      this.selects = this.selectSeats.sort();
+    },
+  },
 };
 </script>
 
 <style scoped>
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  max-height: 55%;
-  text-align: center;
-  overflow: hidden;
-  transition: 1450ms;
-}
 .buttonSeats {
   position: relative;
   overflow: hidden;
@@ -178,56 +206,65 @@ export default {
   background-color: crimson;
   outline: none;
   color: white;
-  font-size: 32px;
+  font-size: calc(18px + 1vw / 1.8);
+  z-index: -1;
   left: 0%;
   height: 100%;
   width: 35%;
   border-radius: 12px;
   cursor: pointer;
-  transition: 450ms;
-}
-.nextActive {
-  position: absolute;
-  border: none;
-  background-color: grey;
-  outline: none;
-  color: black;
-  font-size: 32px;
-  height: 100%;
-  left: 28%;
-  width: 20%;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 650ms;
-}
-.notNextActive {
-  position: absolute;
-  border: none;
-  background-color: greenyellow;
-  outline: none;
-  color: black;
-  font-size: 32px;
-  height: 100%;
-  right: 0;
-  width: 20%;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 650ms;
+  opacity: 0;
+  transition: 420ms;
 }
 
-.notActive {
+.ActiveCancel {
+  white-space: nowrap;
   position: absolute;
+  border: none;
+  z-index: 5;
+  background-color: crimson;
+  outline: none;
+  color: white;
+  font-size: calc(18px + 1vw / 1.8);
+  left: 0%;
+  height: 100%;
+  width: 36%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 420ms;
+}
+
+.notActiveCancel {
+  position: absolute;
+  z-index: -1;
   border: none;
   background-color: greenyellow;
   outline: none;
   color: black;
-  font-size: 32px;
+  font-size: calc(18px + 1vw / 1.8);
   height: 100%;
   left: 28%;
   width: 50%;
   border-radius: 12px;
   cursor: pointer;
-  transition: 450ms;
+  transition: 420ms;
+}
+
+.notActive {
+  opacity: 1;
+  position: absolute;
+  z-index: 5;
+  border: none;
+  background-color: greenyellow;
+  outline: none;
+  color: black;
+  font-size: calc(18px + 1vw / 1.8);
+  height: 100%;
+  left: 28%;
+  width: 50%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 420ms;
 }
 .moviedisplayMain {
   position: absolute;
@@ -239,6 +276,7 @@ export default {
   align-items: center;
   padding: 5% 5%;
   overflow: hidden;
+  user-select: none;
 }
 
 .moviedisplayInfo {
@@ -330,33 +368,32 @@ export default {
   flex-direction: column;
   text-align: left;
   height: fit-content;
-  overflow-y: scroll;
   padding: 0 15px;
 }
-.sinopse::-webkit-scrollbar {
-  margin-left: 35px;
-  width: 5px;
+::-webkit-scrollbar {
+  width: 10px;
 }
-.sinopse::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: white;
   box-shadow: inset 0 0 5px grey;
   border-radius: 6px;
 }
-.sinopse::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: red;
   border-radius: 6px;
 }
-.sinopse::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: rgb(164, 0, 0);
 }
 .sinopse h2 {
-  font-size: 24px;
+  font-size: 32px;
   color: white;
   font-weight: 100;
 }
 .sinopse p {
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 24px;
+  letter-spacing: 0.5px;
   color: white;
 }
 
@@ -540,5 +577,87 @@ a:hover {
 
 .blur {
   filter: blur(15px);
+}
+.slide-fade-overview-enter-from {
+  transform: translateY(-220px);
+  opacity: 0;
+}
+
+.slide-fade-overview-enter-active {
+  transition: all 0.5s;
+}
+
+.slide-fade-overview-leave-active {
+  transition: all 0.5s;
+}
+
+.slide-fade-overview-enter-from {
+  transform: translateY(-220px);
+  opacity: 0;
+}
+
+.slide-fade-overview1-enter-from {
+  transform: translateX(-220px);
+  opacity: 0;
+}
+
+.slide-fade-overview1-enter-active {
+  transition: all 1.2s;
+}
+
+.slide-fade-overview1-leave-active {
+  transition: all 0.5s;
+}
+
+.slide-fade-overview1-enter-from {
+  transform: translateX(-220px);
+  opacity: 0;
+}
+
+.seats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.seatsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.seat {
+  width: 70px;
+  height: 70px;
+  border: 2px solid red;
+  color: black;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.poltronasSelect {
+  height: fit-content;
+  width: 100%;
+  text-align: center;
 }
 </style>

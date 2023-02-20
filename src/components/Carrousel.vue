@@ -34,10 +34,11 @@ export default {
     };
   },
   mounted() {
-    fetch("https://jediflix-back-production.up.railway.app/films")
-      .then((res) => res.json())
+    axios.get("https://jediflix-back-production.up.railway.app/films")
+      .then((res) => res.data)
       .then((data) => (this.movies = data))
       .catch((err) => console.log(err));
+      console.log(this.movies);
   },
   methods: {
     timed() {
