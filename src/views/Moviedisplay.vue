@@ -65,7 +65,11 @@
           <div v-if="seats" class="seats">
             <Transition name="slide-fade-overview1" appear>
               <div class="poltronasSelect">
-                <h1>Suas Poltronas:</h1>
+                <div class="pricePoltrona">
+
+                  <h1>Suas Poltronas:</h1>
+                  <h1>{{this.total}}</h1>
+                </div>
                 <h1>{{ this.selects }}</h1>
               </div>
             </Transition>
@@ -144,6 +148,7 @@ export default {
       overview: "",
       uri: "https://jediflix-back-production.up.railway.app/film/" + this.id,
       selects: "",
+      total: "",
     };
   },
   mounted() {
@@ -175,19 +180,24 @@ export default {
         this.trailer = trailerUrl;
 
         this.dataSeats = res.data.seats;
+        this.isLoading = false
       })
-      .then((res) => {this.isLoading = false})
       .catch((error) => {
         console.log(error);
       });
   },
   methods: {
     nigga: function (seatId) {
-      console.log(seatId);
+      this.total = Number(this.total) + Number(this.price);
+      console.log(this.total);
+      const seatWasFound = this.selectSeats.find((seatId) => seatId !== seatId);
+      if (seatWasFound) {
+          const index = this.selectSeats.indexOf(seatWasFound);
+
+          this.selectSeats.splice(index, 1);
+          console.log("macaco");
+        }
       this.selectSeats.push(Number(seatId));
-      for (let i = 0; i < seatId; i++) {
-        console.log("numero não incluido" + seatId);
-      }
       console.log("selecionado " + this.selectSeats.sort());
       this.selects = this.selectSeats.sort();
     },
