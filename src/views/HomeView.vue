@@ -4,14 +4,10 @@
     <Carrousel />
     <Category />
     <Catalogue />
-    <Transition name="fade">
-      <Loading v-if="isLoading" url="../assets/loading.mp4" />
-    </Transition>
   </div>
 </template>
 
 <script>
-import Loading from "../components/Loading";
 import Navbarhome from "../components/Navbarhome";
 import Catalogue from "../components/Catalogue";
 import Carrousel from "../components/Carrousel";
@@ -20,26 +16,10 @@ import Category from "../components/Category";
 export default {
   name: "HomeView",
   components: {
-    Loading,
     Navbarhome,
     Carrousel,
     Category,
     Catalogue,
-  },
-  data() {
-    return {
-      isLoading: true,
-    };
-  },
-  methods: {
-    timed() {
-      setInterval(() => {
-        this.isLoading = false;
-      }, 2000);
-    },
-  },
-  created() {
-    this.timed();
   },
 };
 </script>

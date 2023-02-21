@@ -105,9 +105,13 @@
       </div>
     </Transition>
   </div>
+  <Transition name="fade">
+    <Loading v-if="isLoading" url="../assets/loading.mp4" />
+  </Transition>
 </template>
 
 <script>
+import Loading from "../components/Loading";
 import Trailer from "../components/Trailer";
 import axios from "axios";
 export default {
@@ -115,9 +119,11 @@ export default {
   props: ["id"],
   components: {
     Trailer,
+    Loading,
   },
   data() {
     return {
+      isLoading: true,
       active: false,
       selectSeats: [],
       dataSeats: [],
@@ -170,6 +176,7 @@ export default {
 
         this.dataSeats = res.data.seats;
       })
+      .then((res) => {this.isLoading = false})
       .catch((error) => {
         console.log(error);
       });
