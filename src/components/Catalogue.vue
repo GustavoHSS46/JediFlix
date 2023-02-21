@@ -15,20 +15,29 @@
       <span class="material-symbols-outlined"> mood </span>
     </div>
   </div>
+  <Transition name="fade">
+    <Loading v-if="isLoading" url="../assets/loading.mp4" />
+  </Transition>
 </template>
 
 <script>
+import Loading from "../components/Loading";
 import axios from "axios";
 export default {
+  components: {
+    Loading,
+  },
   data() {
     return {
       movies: [],
+      isLoading: true,
     };
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get("https://jediflix-back-production.up.railway.app/films")
       .then((res) => (this.movies = res.data))
+      .then((res) => {this.isLoading = false})
       .catch((err) => console.log(err));
   },
 };
