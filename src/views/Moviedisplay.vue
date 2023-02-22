@@ -55,33 +55,39 @@
           </button>
           <button
             :class="[seats ? true : 'notActiveCancel', 'ActiveCancel']"
-            @click="seats = !seats"
+            @click="(seats = !seats), clearingSeat()"
             class="ActiveCancel"
           >
             Cancelar Lugares
           </button>
+          <Transition name="slide-fade-overview" appear>
+            <router-link class="nextPage" v-if="wasSelected" to="/">
+              <button class="nextPageBtn">Checkout</button>
+            </router-link>
+          </Transition>
         </div>
         <div class="container">
           <div v-if="seats" class="seats">
             <Transition name="slide-fade-overview1" appear>
               <div class="poltronasSelect">
                 <div class="pricePoltrona">
-
                   <h1>Suas Poltronas:</h1>
-                  <h1>{{this.total}}</h1>
+                  <h1 v-if="wasSelected">{{ this.selects }}.</h1>
+                  <h1>R${{ this.total }},00</h1>
                 </div>
-                <h1>{{ this.selects }}</h1>
               </div>
             </Transition>
             <Transition name="slide-fade-overview" appear>
               <div class="seatsContainer">
                 <div
-                  @click="nigga(seat.name)"
                   class="seat"
                   v-for="seat in dataSeats"
                   :key="seat.id"
+                  @click="changeColor(seat.name), nigga(seat.name)"
                 >
-                  <h1>{{ seat.name }}</h1>
+                  <h1>
+                    {{ seat.name }}
+                  </h1>
                 </div>
               </div>
             </Transition>
@@ -127,6 +133,7 @@ export default {
   },
   data() {
     return {
+      nextPage: false,
       isLoading: true,
       active: false,
       selectSeats: [],
@@ -148,7 +155,8 @@ export default {
       overview: "",
       uri: "https://jediflix-back-production.up.railway.app/film/" + this.id,
       selects: "",
-      total: "",
+      total: 0,
+      wasSelected: false,
     };
   },
   mounted() {
@@ -180,32 +188,94 @@ export default {
         this.trailer = trailerUrl;
 
         this.dataSeats = res.data.seats;
-        this.isLoading = false
+        this.isLoading = false;
       })
       .catch((error) => {
         console.log(error);
       });
   },
   methods: {
-    nigga: function (seatId) {
-      this.total = Number(this.total) + Number(this.price);
-      console.log(this.total);
-      const seatWasFound = this.selectSeats.find((seatId) => seatId !== seatId);
-      if (seatWasFound) {
-          const index = this.selectSeats.indexOf(seatWasFound);
-
+    nigga: function (seatId) {      
+      if (Number(seatId) < 10) {
+        let zero = seatId.toString().padStart(2, "0");
+        const wasFound = this.selectSeats.includes(zero);
+        if (wasFound == true) {
+          let index = this.selectSeats.indexOf(zero);
           this.selectSeats.splice(index, 1);
-          console.log("macaco");
+          console.log(this.selectSeats);
+          this.total = Number(this.total) - Number(this.price);
+          if (this.selectSeats.length == 0) {
+            this.wasSelected = false;
+          }
+        } else {
+          this.selectSeats.push(zero);
+          this.wasSelected = true;
+          this.total = Number(this.total) + Number(this.price);
         }
-      this.selectSeats.push(Number(seatId));
-      console.log("selecionado " + this.selectSeats.sort());
+      } else {
+        const wasFound = this.selectSeats.includes(seatId);
+        console.log(wasFound);
+        if (wasFound == true) {
+          let index = this.selectSeats.indexOf(seatId);
+          this.selectSeats.splice(index, 1);
+          console.log(this.selectSeats);
+          this.total = Number(this.total) - Number(this.price);
+          if (this.selectSeats.length == 0) {
+            this.wasSelected = false;
+          }
+        } else {
+          this.selectSeats.push(seatId);
+          this.wasSelected = true;
+          this.total = Number(this.total) + Number(this.price);
+        }
+      }
       this.selects = this.selectSeats.sort();
+
+      const regex = /[]/i;
+      let replace = this.selects.toString().replace(regex, "");
+      this.selects = replace;
     },
+
+    clearingSeat: function () {
+      this.wasSelected = false;
+      this.selectSeats = [];
+      this.selects = "";
+      this.total = 0;
+    },
+
+    changeColor: function (id) {},
   },
 };
 </script>
 
 <style scoped>
+.white {
+  color: red !important;
+  background-color: aqua !important;
+}
+
+button {
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nextPage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+}
+.nextPageBtn {
+  border: 0;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  background-color: greenyellow;
+  font-size: calc(16px + 1vw / 1.8);
+}
+
 .buttonSeats {
   position: relative;
   overflow: hidden;
@@ -223,7 +293,7 @@ export default {
   background-color: crimson;
   outline: none;
   color: white;
-  font-size: calc(18px + 1vw / 1.8);
+  font-size: calc(16px + 1vw / 1.8);
   z-index: -1;
   left: 0%;
   height: 100%;
@@ -242,7 +312,7 @@ export default {
   background-color: crimson;
   outline: none;
   color: white;
-  font-size: calc(18px + 1vw / 1.8);
+  font-size: calc(16px + 1vw / 1.8);
   left: 0%;
   height: 100%;
   width: 36%;
@@ -258,7 +328,7 @@ export default {
   background-color: greenyellow;
   outline: none;
   color: black;
-  font-size: calc(18px + 1vw / 1.8);
+  font-size: calc(16px + 1vw / 1.8);
   height: 100%;
   left: 28%;
   width: 50%;
@@ -275,7 +345,7 @@ export default {
   background-color: greenyellow;
   outline: none;
   color: black;
-  font-size: calc(18px + 1vw / 1.8);
+  font-size: calc(16px + 1vw / 1.8);
   height: 100%;
   left: 28%;
   width: 50%;
@@ -391,16 +461,16 @@ export default {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: white;
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 6px;
+  background: none;
+  border: none;
+  outline: none;
 }
 ::-webkit-scrollbar-thumb {
-  background: red;
+  background: rgb(163, 0, 0);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(164, 0, 0);
+  background: rgb(139, 0, 0);
 }
 .sinopse h2 {
   font-size: 32px;
@@ -429,8 +499,8 @@ export default {
 }
 
 .cover {
-  width: 80%;
-  height: 100%;
+  min-width: 150px !important;
+  min-height: 375px !important;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 15px;
@@ -600,18 +670,20 @@ a:hover {
   opacity: 0;
 }
 
+.slide-fade-overview-leave-to {
+  transform: translateY(220px);
+  opacity: 0;
+}
+
 .slide-fade-overview-enter-active {
   transition: all 0.5s;
 }
 
 .slide-fade-overview-leave-active {
-  transition: all 0.5s;
+  transition: all 0.9s;
 }
 
-.slide-fade-overview-enter-from {
-  transform: translateY(-220px);
-  opacity: 0;
-}
+
 
 .slide-fade-overview1-enter-from {
   transform: translateX(-220px);
@@ -648,6 +720,9 @@ a:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 .seat {
   width: 70px;
@@ -673,8 +748,10 @@ a:hover {
   overflow-x: hidden;
 }
 .poltronasSelect {
-  height: fit-content;
-  width: 100%;
-  text-align: center;
+  height: 20%;
+  width: 90%;
+}
+.poltronasSelect h1 {
+  white-space: wrap;
 }
 </style>

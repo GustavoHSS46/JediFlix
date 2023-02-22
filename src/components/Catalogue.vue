@@ -36,8 +36,10 @@ export default {
   async mounted() {
     await axios
       .get("https://jediflix-back-production.up.railway.app/films")
-      .then((res) => (this.movies = res.data))
-      .then((res) => {this.isLoading = false})
+      .then((res) => {
+        this.movies = res.data
+        this.isLoading = false
+      })
       .catch((err) => console.log(err));
   },
 };

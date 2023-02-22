@@ -33,4 +33,20 @@ body {
   justify-content: center;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: none;
+  border: none;
+  outline: none;
+}
+::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(164, 0, 0);
+}
+
 </style>
