@@ -71,8 +71,10 @@
             <Transition name="slide-fade-overview1" appear>
               <div class="poltronasSelect">
                 <div class="pricePoltrona">
-                  <h1>Suas Poltronas:</h1>
-                  <h1 v-if="wasSelected">{{ this.selects }}.</h1>
+                  <div class="priceNow">
+                    <h1>Suas Poltronas:</h1>
+                    <h1 v-if="wasSelected">{{ this.selects }}.</h1>
+                  </div>
                   <h1>R${{ this.total }},00</h1>
                 </div>
               </div>
@@ -195,7 +197,7 @@ export default {
       });
   },
   methods: {
-    nigga: function (seatId) {      
+    nigga: function (seatId) {
       if (Number(seatId) < 10) {
         let zero = seatId.toString().padStart(2, "0");
         const wasFound = this.selectSeats.includes(zero);
@@ -214,7 +216,6 @@ export default {
         }
       } else {
         const wasFound = this.selectSeats.includes(seatId);
-        console.log(wasFound);
         if (wasFound == true) {
           let index = this.selectSeats.indexOf(seatId);
           this.selectSeats.splice(index, 1);
@@ -225,6 +226,7 @@ export default {
           }
         } else {
           this.selectSeats.push(seatId);
+
           this.wasSelected = true;
           this.total = Number(this.total) + Number(this.price);
         }
@@ -252,6 +254,12 @@ export default {
 .white {
   color: red !important;
   background-color: aqua !important;
+}
+
+.priceNow {
+  display: flex;;
+  flex-direction: row;
+  gap: 15px;
 }
 
 button {
@@ -671,7 +679,7 @@ a:hover {
 }
 
 .slide-fade-overview-leave-to {
-  transform: translateY(220px);
+  transform: translateX(220px);
   opacity: 0;
 }
 
@@ -680,10 +688,8 @@ a:hover {
 }
 
 .slide-fade-overview-leave-active {
-  transition: all 0.9s;
+  transition: all 0.4s;
 }
-
-
 
 .slide-fade-overview1-enter-from {
   transform: translateX(-220px);
